@@ -19,8 +19,6 @@
 import java.io.*;
 import java.util.*;
 
-import javax.sound.midi.SysexMessage;
-
 
 public class YoRPG {
 
@@ -128,15 +126,17 @@ public class YoRPG {
         // Give user the option of using a special attack:
         // If you land a hit, you incur greater damage,
         // ...but if you get hit, you take more damage.
-        try {
-          System.out.println( "\nDo you feel lucky?" );
-          System.out.println( "\t1: Nay.\n\t2: Aye!" );
-          i = Integer.parseInt( in.readLine() );
+        while(true) {
+          try {
+            System.out.println( "\nDo you feel lucky?" );
+            System.out.println( "\t1: Nay.\n\t2: Aye!" );
+            i = Integer.parseInt( in.readLine() );
+            break;
+          }
+          catch ( IOException e ) {
+            System.out.println("Thee hath picked no number!");
+          }
         }
-        catch ( IOException e ) {
-          System.out.println("Thee hath picked no number!");
-        }
-
 
         if ( i == 2 )
           pat.specialize();
@@ -171,11 +171,15 @@ public class YoRPG {
 
         // added things
         System.out.println( "\nYou hath gained 10 XP and climbed one level" +
-                            "\n\t1: Gain 10 health.\n\t2: Gain 10 damage.");
-        try {
-          f = Integer.parseInt(in.readLine());
-        } catch (IOException z) {
-          System.out.println("Thee hath picked no number!");
+                            "\nAdditionally thy battle rating hath increased by 0.1" +
+                            "\n\t1: Gain 10 health.\n\t2: Gain 10 strength.");
+        while (true) {
+          try {
+            f = Integer.parseInt(in.readLine());
+            break;
+          } catch (IOException z) {
+            System.out.println("Thee hath picked no number!");
+          }
         }
         if (f == 1) {
           pat.increaseLevel(10, 0);

@@ -1,14 +1,15 @@
 public class Monster extends Character {
 
-
-
+  private String type = "";
+  
   public Monster() {
     super();
-
+    this.type = "Ogre";
+    this.strength = 5;
   }
   public Monster(String name) {
     super(name);
-
+    this.type = "Ogre";
   }
 
   public int attack(Protagonist name) {
@@ -20,14 +21,14 @@ public class Monster extends Character {
 
       } else {
         System.out.println("Youg swung too hard, and bashed thy skull");
-        takeDamage(5);
+        lowerHP(5);
 
       }
     } else {
       damage = 5;
 
     }
-    name.takeDamage(damage);
+    name.lowerHP(damage);
 
 
     return damage;
