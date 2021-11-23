@@ -1,2 +1,2 @@
 # YoRPG_SillySerpents
-YoRPG project
+Roster: Vansh Saboo, Jason Zhou; Duckies: , Tiggy

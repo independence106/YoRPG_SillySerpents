@@ -16,7 +16,7 @@
  *
  **********************************************/
 
-//Basic Skeletons w/o methods
+//No errors yay! 
 
 import java.io.*;
 import java.util.*;
