@@ -1,2 +1,2 @@
 # YoRPG_SillySerpents
-Roster: Vansh Saboo, Jason Zhou; Duckies: , Tiggy
+Roster: Vansh Saboo, Jason Zhou; Duckies: Tiffany, Tiggy
