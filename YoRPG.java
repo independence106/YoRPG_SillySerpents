@@ -18,6 +18,8 @@
 
  /**
   * - THE SHOP!!!! NEW ARTIFACTS POGGERS, GAME IS UNBALANCED THOUGH!
+  *
+  * - FINAL ADDITIONS: Choose class, shop, level increase....
   */
 
 
