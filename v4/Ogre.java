@@ -12,6 +12,10 @@ public class Ogre extends Monster {
     public String getType() {
       return "Ogre";
     }
+    public static String about() {
+      return "Grunt. Not the talkative type. You don't want to mess with these bad boys." +
+             "\nThey pack quite a punch. Seriously, don't mess with them.";
+    }
     public int attack(Character e) {
         calcNewDamage(this);
         if (attackState.equals("specialize")) {

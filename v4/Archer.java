@@ -16,6 +16,9 @@ public class Archer extends Protagonist{
       System.out.println("\nThy speed has prevented thee from taking damage! Lucky!");
     }
   }
+  public static String about() {
+    return "Pew Pew. Very nice class. Lotsa speed and dodging, good damage. Shoots things.";
+  }
   
   public int attack(Character e) {
     calcNewDamage(this);

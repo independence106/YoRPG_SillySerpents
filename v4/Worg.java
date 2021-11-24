@@ -29,6 +29,10 @@ public class Worg extends Monster {
         System.out.println("\nWorg too fast, attack has been missed!");
       }
     }
+    public static String about() {
+      return "Speed. I am speed. These monsters are fast. Too fast in fact. They mainly" +
+             "\nwill just harass you. No harm done, right?";
+    }
     public int attack(Character e) {
         calcNewDamage(this);
         if (attackState.equals("specialize")) {

@@ -14,6 +14,10 @@ public class Tank extends Protagonist{
     this.name = name;
     this.strength = 50;
   }
+  public static String about() {
+    return "TONK. ME TONK. Will take a beating from any monster. Passed tank school" +
+           "\nwith full honors. Can heal himself too! Very useful.";
+  }
   public int attack(Character e) {
     calcNewDamage(this);
     if (attackState.equals("specialize")) {

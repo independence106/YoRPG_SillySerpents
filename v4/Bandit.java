@@ -15,6 +15,10 @@ public class Bandit extends Monster {
     public String getType() {
       return "Bandit";
     }
+    public static String about() {
+      return "I steal things. Bandits are notorius for their ability to steal." +
+             "\nYou never want to meet these creatures in a game for you'll find you wallet to be empty...";
+    }
     public int attack(Protagonist e) {
         calcNewDamage(this);
         if (attackState.equals("specialize")) {

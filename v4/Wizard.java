@@ -15,6 +15,10 @@ public class Wizard extends Protagonist{
   public void calcNewDamage() {
     this.damage = (int) (this.strength * this.attackRating);
   }
+  public static String about() {
+    return "Abrahahsdfa. Very forgetful about his spellbook" +
+           "\nMay occasionally turn something into a cat. Kinda cuckoo";
+  }
   public int attack(Character e) {
     calcNewDamage(this);
     if (attackState.equals("specialize")) {
