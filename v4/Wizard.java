@@ -3,9 +3,14 @@ public class Wizard extends Protagonist{
 
   public Wizard() {
     super();
+    this.defense = 0;
+    this.health = 50;
   }
   public Wizard(String name) {
     super(name);
+    this.defense = 0;
+    this.health = 50;
+
   }
   public void calcNewDamage() {
     this.damage = (int) (this.strength * this.attackRating);

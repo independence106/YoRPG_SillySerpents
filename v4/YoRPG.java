@@ -17,7 +17,7 @@
  **********************************************/
 
  /**
-  * - Class selector
+  * - THE SHOP!!!! NEW ARTIFACTS POGGERS, GAME IS UNBALANCED THOUGH!
   */
 
 
@@ -152,6 +152,7 @@ public class YoRPG {
     Returns false if monster wins (player dies).
     =============================================*/
   public boolean playTurn() {
+    boolean picked = false;
     int i = 1;
     int f = 1;
     int d1, d2;
@@ -159,10 +160,15 @@ public class YoRPG {
     if ( Math.random() >= ( difficulty / 3.0 ) )
 	    System.out.println( "\nNothing to see here. Move along!" );
     else {
-	    System.out.println( "\nLo, yonder monster approacheth!" );
-
-	    smaug = new Monster();
-
+	    
+      if (Math.random() > 0.66) {
+	      smaug = new Ogre("smaug");
+      } else if (Math.random() < 0.33) {
+        smaug = new Worg("smaug");
+      } else {
+        smaug = new Bandit("smaug");
+      }
+      System.out.println( "\nLo, yonder " + smaug.getType() + " approacheth!" );
 	    while( smaug.isAlive() && pat.isAlive() ) {
 
         // Give user the option of using a special attack:
@@ -173,9 +179,13 @@ public class YoRPG {
             System.out.println( "\nDo you feel lucky?" );
             System.out.println( "\t1: Nay.\n\t2: Aye!" );
             i = Integer.parseInt( in.readLine() );
-            break;
+            if (i < 3 && i > 0) {
+              break;
+            } else {
+              System.out.println("Thee hath picked no valid option!");
+            }
           }
-          catch ( IOException e ) {
+          catch ( Exception e ) {
             System.out.println("Thee hath picked no number!");
           }
         }
@@ -217,6 +227,7 @@ public class YoRPG {
         System.out.println( "\nYou hath gained 10 XP and climbed one level" +
                             "\nAdditionally thy battle rating hath increased by 0.1" +
                             "\n\t1: Gain 10 health.\n\t2: Gain 10 strength.");
+        pat.attackRating += 0.1;
         while (true) {
           try {
             f = Integer.parseInt(in.readLine());
@@ -235,7 +246,109 @@ public class YoRPG {
         }
         System.out.println("\nWell done hero! You has slain a monster! Health hath been reset!");
         pat.resetHealth();
+        pat.giveCoins((int) (Math.random() * 10));
+        System.out.println("\nHey there weary traveler! " +
+                           "Would thee like access to the SHOP?" +
+                           "\n\t1. YES\n\t2. NO");
+        picked = false;
+        while(!picked) {
+          try {
+            f = Integer.parseInt(in.readLine());
+            if (f == 1) {
+              picked = true;
+            } else if (f == 2) {
+              picked = true;
+            } else {
+              System.out.println("Thee hath not picked a valid option!");
+            }
+
+          } catch(Exception e) {
+            System.out.println("Thee hath not picked a valid option!");
+          }
+        }
+        //THIS IS STACKABLE!!!!! INTENDED!!!
+        if (f == 1) {
+          System.out.println("\nWelcome to Silly Serpent's shop!" +
+                             "\nHere we sell all kinds of goodies" +
+                             "\nTo help aid you on your journey!" +
+                             "\nOur current inventory of magical items:" +
+                             "\n\t1. Ring O Power: Boost Strength by 10 - 10 Coins" +
+                             "\n\t2. Relic of TONKiness: Boost defense by 20 - 30 Coins" +
+                             "\n\t3. Gem of confidence: Boost attack rating by 1 - 80 Coins" +
+                             "\n\t4. Heart of an eagle: Boost maxhealth by 50 - 30 Coins" +
+                             "\n\t5. Rabbit's foot: Boost speed by 10 - 5 Coins" +
+                             "\n\t6. ????? - ????" +
+                             "\n\t7. Exit" +
+                             "\n\tBuy something or type 7 to exit!" +
+                             "\n\tYour coins: " + pat.getCoins());    
+          picked = false;
+          while(!picked) {
+          try {
+            f = Integer.parseInt(in.readLine());
+            if (f > 0 && f <= 7) {
+              int coins = pat.getCoins();
+              //so far stackable, will keep this as intentional!
+              if (f == 1 && coins > 10) {
+                pat.artifactChange(10, 0, 0, 0, 0, 0);
+                pat.giveCoins(-10);
+                System.out.println("\nThank you for buying!");
+                pat.update();
+                picked = true;
+              } else if (f == 2 && coins > 30) {
+                pat.artifactChange(0, 20, 0, 0, 0, 0);
+                pat.giveCoins(-30);
+                System.out.println("\nThank you for buying!");
+                pat.update();
+                picked = true;
+              } else if (f == 3 && coins > 80) {
+                pat.artifactChange(0, 0, 1, 0, 0, 0);
+                pat.giveCoins(-80);
+                System.out.println("\nThank you for buying!");
+                pat.update();
+                picked = true;
+              } else if (f == 4 && coins > 30) {
+                pat.artifactChange(0, 0, 0, 50, 0, 0);
+                pat.giveCoins(-30);
+                System.out.println("\nThank you for buying!");
+                pat.update();
+                picked = true;
+              } else if (f == 5 && coins > 5) {
+                pat.artifactChange(0, 0, 0, 0, 10, 0);
+                pat.giveCoins(-5);
+                System.out.println("\nThank you for buying!");
+                pat.update();
+                picked = true;
+              } else if (f == 6 && coins > 100) {
+                pat.artifactChange(0, 0, 0, 0, 0, 1);
+                pat.giveCoins(-100);
+                System.out.println("\nThank you for buying!");
+                pat.update();
+                picked = true;
+              } else if (f == 7) {
+                picked = true;
+              } 
+              else if (f == 7) {
+                picked = true;
+              }else {
+                System.out.println("Thee hath not enough coins! OUCH!");
+              }
+            } else {
+              System.out.println("Thee hath not picked a vlid option!");
+            }
+
+          } catch(Exception e) {
+            System.out.println("Thee hath not picked a valid option!");
+          }
+        }
+          System.out.println("\nEnjoy thy day!");      
+          System.out.println("\nCoins: " + pat.getCoins());    
+          System.out.println("\nNew stats: " + pat.toString());                 
+        } else {
+          System.out.println("\nCoins: " + pat.getCoins());    
+          System.out.println("\nNew stats: " + pat.toString()); 
+        }
         return true;
+       
         
 	    }
 	    //option 3: the beast slays you

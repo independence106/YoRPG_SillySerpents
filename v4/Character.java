@@ -20,8 +20,8 @@ public class Character {
     this.maxHealth = 100;
     this.attackState = "normalize";
     this.defense = 1;
-    this.attackRating = 0.1;
-    this.strength = 20;
+    this.attackRating = 0.5;
+    this.strength = 30;
     this.speed = 50;
     
   }
@@ -51,10 +51,11 @@ public class Character {
   public int getDefense() {
     return this.defense; 
   }
-  public String about() {
+  public String toString() {
     return "Name: " + getName() + "\nLevel: " + this.level + 
            "\nHealth: " + this.health + "\nAttack State: " + 
-           this.attackState + "\nAttack Rating: " + this.attackRating;
+           this.attackState + "\nAttack Rating: " + (Math.round(this.attackRating * 100.0) /100.0)
+           + "\nStrength: " + this.strength;
   }
   public void specialize() {
     this.attackState = "specialize";
@@ -94,6 +95,7 @@ public class Character {
       if (amplifier > 5) {
         damage += amplifier * 2;
         e.lowerHP(this.damage);
+        System.out.println("WOWEE! Thy gods have blessed thee I see! Extra DAMAGE!");
       } else {
         System.out.println("Youg swung too hard, and bashed thy skull. Ye lost 5 health!");
         lowerHP(5);
