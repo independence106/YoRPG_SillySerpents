@@ -26,6 +26,7 @@ public class Protagonist extends Character{
     this.defense += artifacts[1];
     this.speed += artifacts[4];
   }
+  
   public void artifactChange(int power, int defense, int attackRating, int health, int speed, int special) {
     artifacts[0] = power;
     artifacts[1] = defense;
