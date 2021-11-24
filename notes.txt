@@ -1,6 +1,65 @@
-DISCO: 
+DISCO:
 -Inheritance is very cool
 -try catch
 
 QCC:
 -n/a
+
+
+
+THINGS WE NEED TO FIX:
+(Below)
+-Make damage at least 5 true damage!
+-fix bugs
+-stackable things must be fixed
+-clean up code
+
+Subclasses:
+(Specials unlocked at level 5)
+Tank:
+  - 200 HP
+  - 20 Def
+  - 50 Strength
+  - 0.5 Attack Rating
+  - Speed SHOULD BE 20
+
+  Specials:
+  -Holy Shield:
+    // need to fix, so only till max health
+    -Heal 20 HP
+  //future
+  -
+
+Archer:
+  Base:
+    - 5 Defense
+    - 75 HP
+    - 40 strength
+    - 1 attack attackRating
+    - 50 Speed
+  Sniper: (attack once every 2 turns)
+    - 10 Defense
+    - 75 HP
+    - 100 Strength
+    - Speed +20
+    - 1 attack Rating
+    Special:
+      -Head shot: 30% to instakill, 1% for bosses
+  Gunner:
+    - 10 defense
+    - 100 HP
+    - Speed -20
+    - 1 attack rating
+    - 40 strength
+    Special:
+      - RRRRRRRRRRRRRRRRRRM: 90% to shoot three bullets do normal damage 10% to jam for 3 turns
+
+
+
+
+Swordsman:
+  Paladin:
+    - 150 HP
+    - 10 Defense
+    - 0.5 attackRating
+Wizard:
