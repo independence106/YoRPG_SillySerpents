@@ -1,0 +1,6 @@
+DISCO: 
+-Inheritance is very cool
+-try catch
+
+QCC:
+-n/a
