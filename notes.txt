@@ -114,7 +114,7 @@ Wizard:
     - 60 health 
     - 6 defense 
     - 1.7 attack rating 
-    - 70 strength
+    - 110 strength
     - 10 speed 
     Special: High Power Magic: (I DONT KNOW IM SORRY)
 
