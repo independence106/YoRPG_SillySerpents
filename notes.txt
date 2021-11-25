@@ -65,10 +65,17 @@ Swordsman:
   Paladin:
     - 150 HP
     - 20 Defense
-    - 0.5 attackRating
     - Speed += 5
     - 1.5 Attack Rating 
     - 50 strength
     Special: 
     - Holy Strike: 30% chance to ignore armor!
+  Barbarian:
+    - 125 HP
+    - 10 Defense
+    - 1.4 Attack Rating 
+    - 60 strength
+    - Speed += 10
+    Special:
+      - Bloodlurst: For every 5% of HP lost, deal 2% more damage
 Wizard:

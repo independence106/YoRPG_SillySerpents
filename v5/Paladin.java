@@ -29,31 +29,35 @@ public class Paladin extends Swordsman {
     public static String about() {
       return "Veteran warrior in the old holy campaigns against demons. Excellent warrior!";
     }
-    public int attack(Character e) {
-      calcNewDamage(this, e);
-      
-    if (attackState.equals("specialize")) {
-        this.speed += 1;
-        e.lowerHP(this.damage, this.getType());
-        System.out.println("\nTraining with master elmo has paid off. Thy is now faster!");
-        } else if(attackState.equals("3")) {
-          double RNGesus = Math.random();
-        if (RNGesus < 0.34) {
-            System.out.println("Insert cool thing here");
-            e.lowerHP(e.getHealth(), this.getType());
-        } else {
-            System.out.println("Yikes! Your bullet only grazed " + e.getType());
-            e.lowerHP(this.damage / 3, this.getType());
-        }
-        
-        
-        turnCounter = 0;
-        return this.damage;
+
+    public void calcNewDamage(Character c, Character attackee, boolean holy) {
+      if (holy) {
+        this.damage = (int) (this.strength * this.attackRating);
       } else {
-        System.out.println("Reloading shot...");
-        turnCounter = 1;
-        return 0;
+        this.damage = (int) ((this.strength * this.attackRating) - attackee.getDefense());
       }
+      if (this.damage <= 0) {
+        this.damage = 5;
+      }
+    }
+    public int attack(Character e) {
+      calcNewDamage(this, e, false);
+      if (attackState.equals("specialize")) {
+        //System.out.println("Swinging Hammer...");
+        double RNGesus = Math.random();
+        if (RNGesus < 0.31) {
+          System.out.println("HOLLLLYYY STRIKE!");
+          calcNewDamage(this, e, true);
+          e.lowerHP(this.damage, this.getType());
+        } else {
+          System.out.println("Thy hath forgotten spell has thee not? Perform 2/3 of damage you will");
+          this.damage = (int) (this.damage * 0.66);
+          e.lowerHP((int)(this.damage * 0.66), this.getType());
+        }
+      } else {
+        e.lowerHP(this.damage, this.getType());
+      }
+      return this.damage;
     }
   }
   
