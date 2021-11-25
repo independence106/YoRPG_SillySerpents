@@ -13,6 +13,10 @@ THINGS WE NEED TO FIX:
 -fix bugs
 -stackable things must be fixed
 -clean up code
+-ALSO WHEN ATTACKING HAVE THEM LIST ALL OPTIONS AVAILBALE TO THAT ONE CLASS!!!
+-Speed should be universal
+
+-CALCDAMAGE HAS A SERIOUS ASS ERROR!!! <-- I think I fixed this
 
 Subclasses:
 (Specials unlocked at level 5)
@@ -60,6 +64,11 @@ Archer:
 Swordsman:
   Paladin:
     - 150 HP
-    - 10 Defense
+    - 20 Defense
     - 0.5 attackRating
+    - Speed += 5
+    - 1.5 Attack Rating 
+    - 50 strength
+    Special: 
+    - Holy Strike: 30% chance to ignore armor!
 Wizard:
