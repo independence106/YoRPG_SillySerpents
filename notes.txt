@@ -9,7 +9,7 @@ QCC:
 
 THINGS WE NEED TO FIX:
 (Below)
--Make damage at least 5 true damage!
+
 -fix bugs
 -stackable things must be fixed
 -clean up code
@@ -17,6 +17,7 @@ THINGS WE NEED TO FIX:
 -Speed should be universal
 
 -CALCDAMAGE HAS A SERIOUS ASS ERROR!!! <-- I think I fixed this
+-Make damage at least 5 true damage! <-- Think I fixed it
 
 Subclasses:
 (Specials unlocked at level 5)
