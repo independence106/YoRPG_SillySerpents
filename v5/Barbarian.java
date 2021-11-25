@@ -14,6 +14,7 @@ public class Barbarian extends Swordsman {
       super();
       this.strength = 70;
       this.health = 125;
+      this.maxHealth = 125;
       this.attackRating = 1.4;
       this.speed += 10;
       this.defense = 10;
@@ -27,33 +28,22 @@ public class Barbarian extends Swordsman {
       super(health, damage, strength, attackRating, defense, name, level);
     }
     public static String about() {
-      return "Veteran warrior in the old holy campaigns against demons. Excellent warrior!";
-    }
-
-    public void calcNewDamage(Character c, Character attackee) {
-      this.damage = (int) ((this.strength * this.attackRating) - attackee.getDefense());
-      
-      if (this.damage <= 0) {
-        this.damage = 5;
-      }
+      return "Cast out from the Holy armies. Learned from the dark forces to gain power. Very poweful attacks, not so much defense";
     }
     public int attack(Character e) {
       calcNewDamage(this, e);
       if (attackState.equals("specialize")) {
         //System.out.println("Swinging Hammer...");
-        
+        //ALWAYS ROUNDS TO NEAREST!!!
+        double percentageOHealthDivided5 = (1 - ((this.health * 1.0) / (this.maxHealth * 1.0))) / 0.05;
+        calcNewDamage(this, e);
+        this.damage = (int) (Math.round(this.damage * (1 + 0.02 * (percentageOHealthDivided5))));
+        e.lowerHP(this.damage, this.getType());
+
       } else {
         e.lowerHP(this.damage, this.getType());
       }
       return this.damage;
-    }
-    public static void main(String[] args) {
-      Monster e = new Monster();
-      Paladin elmo = new Paladin();
-      elmo.specialize();
-      System.out.println(elmo.attack(e));
-      System.out.println(elmo.attack(e));
-      System.out.println(elmo.attack(e));
     }
   }
   

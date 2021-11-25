@@ -74,8 +74,54 @@ Swordsman:
     - 125 HP
     - 10 Defense
     - 1.4 Attack Rating 
-    - 60 strength
+    - 70 strength
     - Speed += 10
     Special:
       - Bloodlurst: For every 5% of HP lost, deal 2% more damage
+
+Tank:
+  - 20 defense
+  - 20 strength
+  - 0.3 attack rating
+  - 200 health
+  - 20 speed
+  Special: Sheild O' Life: Heal 20 HP (cannot exceed current health)
+  Tonk:
+    - 30 defense
+    - 25 strength
+    - 0.4 attack rating
+    - 300 health
+    - 15 speed
+    - Special: Taunt: Next two attacks, monster can 50% chance of missing (cooldown 4 turns) <-- not implemented
+  Fortress:
+    - 50 defense
+    - 5 strength
+    - 0.3 attack rating 
+    - 500 health 
+    - 5 speed 
+    - Special: Shield Rain: Does 20 true damage
+
 Wizard:
+    - 65 health
+    - 5 defense
+    - 1.5 attack rating 
+    - 100 strength
+    - 15 speed
+    Special: Vortex Summoning
+    - Deal an extra 20 true damage
+
+    Arcane Wizard: (Completely ignores armor)
+    - 60 health 
+    - 6 defense 
+    - 1.7 attack rating 
+    - 70 strength
+    - 10 speed 
+    Special: High Power Magic: (I DONT KNOW IM SORRY)
+
+    Necromancer: 
+    - 70 health 
+    - 10 defense 
+    - 1.4 attack rating 
+    - 50 strength 
+    - 15 speed 
+    Special: Undead: Summon an undead (up to two). Undeads have health and attack scaled to wizard lvl
