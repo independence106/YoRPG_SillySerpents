@@ -9,15 +9,16 @@ QCC:
 
 THINGS WE NEED TO FIX:
 (Below)
-
 -fix bugs
--stackable things must be fixed
+
 -clean up code
 -ALSO WHEN ATTACKING HAVE THEM LIST ALL OPTIONS AVAILBALE TO THAT ONE CLASS!!!
--Speed should be universal
+
 
 -CALCDAMAGE HAS A SERIOUS ASS ERROR!!! <-- I think I fixed this
 -Make damage at least 5 true damage! <-- Think I fixed it
+-stackable things must be fixed <-- Fixed
+-Speed should be universal <-- Fixed
 
 Subclasses:
 (Specials unlocked at level 5)

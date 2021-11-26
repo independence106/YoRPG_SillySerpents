@@ -1,0 +1,42 @@
+//basically a worg, w/ an ability to "dodge an attack"
+//added about method
+public class Archer extends Protagonist{
+
+
+  public Archer() {
+    this.health = 75;
+    this.maxHealth = 75;
+    this.strength = 40;
+    this.attackRating = 1.0;
+    this.speed = 50;
+    this.defense = 5;
+
+  }
+  public Archer(String name) {
+    this();
+    this.name = name;
+  }
+  public Archer(int health, int damage, int strength, double attackRating, int defense, String name, int level) {
+    super(health, damage, strength, attackRating, defense, name, level);
+  }
+  
+  public static String about() {
+    return "\nPew Pew. Very nice class. Lotsa speed and dodging, good damage. Shoots things.";
+  }
+  
+  public int attack(Character e) {
+    calcNewDamage(this, e);
+    if (attackState.equals("specialize")) {
+        //yes stackable speed is intended
+        this.speed += 1;
+        e.lowerHP(this.damage, this.getType());
+        this.test = "\nTraining with master elmo has paid off. Thy is now faster!";
+    } else {
+      this.test = "Steady...Aim...FIRE! " + this.getName() + " shoots ";
+      e.lowerHP(this.damage, this.getType());
+    }
+    
+    
+    return this.damage;
+  }
+}

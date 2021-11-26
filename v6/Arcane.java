@@ -36,6 +36,7 @@ public class Arcane extends Wizard {
         //System.out.println("Swinging Hammer...");
         //ALWAYS ROUNDS TO NEAREST!!!
       } else {
+        this.test = "WIP";
         System.out.println("They hath swung shiled");
         e.lowerHP(this.damage, this.getType());
       }
