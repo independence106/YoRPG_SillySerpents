@@ -28,13 +28,14 @@ public class Tonk extends Tank {
       this.name = name;
     }
     //HEY fix this:
-    public Tonk(int maxHealth, int damage, int strength, double attackRating, int defense, String name, int level) {
+    public Tonk(int maxHealth, int strength, double attackRating, int defense, String name, int level, int speed, int coins) {
       this.health = maxHealth + 100;
       this.maxHealth = maxHealth + 100;
       this.strength = strength - 5;
       this.attackRating = attackRating - 0.1;
       this.speed = speed - 5;
       this.defense = defense + 10;
+      this.coins = coins;
       this.level = level;
       this.name = name;
       this.attackTypes = new String[] {"Shield Slap", "Shield O' Life", "Taunt"};

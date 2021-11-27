@@ -1,6 +1,7 @@
 //added subclass tank. TONK
 public class Tank extends Protagonist{
   public Tank() {
+    super();
     this.health = 200;
     this.level = 0;
     this.maxHealth = 200;
@@ -13,10 +14,10 @@ public class Tank extends Protagonist{
   public Tank(String name) {
     this();
     this.name = name;
-    this.strength = 50;
+    this.strength = 30;
   }
-  public Tank(int health, int damage, int strength, double attackRating, int defense, String name, int level) {
-    super(health, damage, strength, attackRating, defense, name, level);
+  public Tank(int health, int strength, double attackRating, int defense, String name, int level) {
+    super(health, strength, attackRating, defense, name, level);
   }
   public static String about() {
     return "\nTONK. ME TONK. Will take a beating from any monster. Passed tank school" +
@@ -34,7 +35,7 @@ public class Tank extends Protagonist{
         }
         this.damage = 0;
     } else {
-        this.test = "\nThee slaps " + e.getType() + " . Thee attacks ";
+        this.test = "\nThee slaps " + e.getType() + ". Thee attacks ";
         e.lowerHP(this.damage, this.getType()); 
     }
     return this.damage;

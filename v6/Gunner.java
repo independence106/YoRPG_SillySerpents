@@ -29,13 +29,14 @@ public class Gunner extends Archer {
       this.name = name;
     }
     //HEY fix this:
-    public Gunner(int maxHealth, int damage, int strength, double attackRating, int defense, String name, int level) {
+    public Gunner(int maxHealth, int strength, double attackRating, int defense, String name, int level, int speed, int coins) {
       this.health = maxHealth + 25;
       this.maxHealth = maxHealth + 25;
       this.strength = strength + 60;
       this.attackRating = attackRating;
       this.speed = speed - 20;
       this.defense = defense + 5;
+      this.coins = coins;
       this.level = level;
       this.name = name;
       this.attackTypes = new String[] {"Shoot", "Chug Jug", "Burst"};

@@ -15,9 +15,14 @@ public class Dialogue {
         int monsterDamage = monster.attack(protagonist);
         if (monster.isAlive())
           System.out.println( monster.test + 
-                              " for " + monsterDamage + " points of damage.\n\n\t" + protagonist.getName()
+                              " for " + monsterDamage + " points of damage.");
+            System.out.println(protagonist.attackMiss);
+            System.out.println(monster.attackMiss);
+        if (protagonist.isAlive() && monster.isAlive()) {
+            System.out.println("\n\t" + protagonist.getName()
                               + " Health: " + protagonist.getHealth() + "\n\t" + "Monster Health: " +
                               monster.getHealth());
+        }
     }
     public static void bothDie() {
         System.out.println( "'Twas an epic battle, to be sure... " +
@@ -26,10 +31,10 @@ public class Dialogue {
                             "laid a fatal blow upon thy skull." );
     }
     public static void beastDies() {
-        System.out.println( "\nHuzzaaH! Ye olde monster hath been slain!" );
+        System.out.println( "\nHuzzaaH! Ye olde monster hath been slain! Ye Health hath been reset" );
         System.out.println( "\nYou hath gained 10 XP and climbed one level" +
-                            "\nAdditionally thy battle rating hath increased by 0.1" +
-                            "\n\t1: Gain 10 health.\n\t2: Gain 10 strength.");
+                            "\nAdditionally thy battle rating hath increased by 0.05" +
+                            "\n\t1: Gain 2 health.\n\t2: Gain 2 strength.");
     }
     public static void listOptions(Character e) {
         

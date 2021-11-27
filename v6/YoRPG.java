@@ -102,7 +102,7 @@ public class YoRPG {
         name = in.readLine();
         break;
       }
-      catch ( IOException e ) {
+      catch ( Exception e ) {
         System.out.println("Thee has a name, hath not?");
       }
     }
@@ -179,25 +179,29 @@ public class YoRPG {
 	    //option 2: you slay the beast
 	    else if ( !smaug.isAlive() ) {
         Dialogue.beastDies();
-        pat.attackRating += 0.1;
+        pat.attackRating += 0.05;
         while (true) {
           try {
             f = Integer.parseInt(in.readLine());
-            break;
-          } catch (IOException z) {
+            if (f > 0 && f < 3) {
+              break;
+            } else {
+              System.out.println("Not a valid choice");
+            }
+          } catch (Exception z) {
             System.out.println("Thee hath picked no number!");
           }
         }
 
         if (f == 1) {
-          pat.increaseLevel(10, 0);
+          pat.increaseLevel(2, 0);
         } else {
-          pat.increaseLevel(0, 10);
+          pat.increaseLevel(0, 2);
         }
         if (pat.getLevel() == 5 ) {
           this.prestige();
         }
-        System.out.println("\nWell done hero! You has slain a monster! Health hath been reset!");
+        
         pat.resetHealth();
         pat.giveCoins((int) (Math.random() * 10));
         System.out.println("\nHey there weary traveler! " +
@@ -273,6 +277,145 @@ public class YoRPG {
         }
      }
   }
+  public boolean bossFight() {
+    int i;
+  
+    System.out.print("\033[H\033[2J");
+    System.out.flush();
+    System.out.println("*A mysterious voice starts speaking*");
+    System.out.println("It seems that you have reached my lair. I would applaud you if you weren't going to die soon!");
+    System.out.println("Those puny monsters are NOTHING. Feel the wrath of my pwer and tremble!");
+    System.out.println("Your life is now over. Guards KILL THIS HERO!");
+    
+    Guard guard1 = new Guard();
+    Guard guard2 = new Guard();
+    Boss boss = new Boss();
+    while(guard1.isAlive() && pat.isAlive()) {
+      for(;;) {
+        try {
+          Dialogue.listOptions(pat);
+          
+          i = Integer.parseInt( in.readLine() );
+          if (i < (pat.attackTypes.length + 1) && i > 0) {
+            break;
+          } else {
+            System.out.println("Thee hath picked no valid option!");
+          }
+        }
+        catch ( Exception e ) {
+          System.out.println("Thee hath picked no number!");
+        }
+      }
+
+      
+      pat.setAttackType(pat.attackTypes[i - 1]);
+      
+      
+      Dialogue.dealDamage(pat, guard1);
+      
+    }
+    if (!guard1.isAlive()) {
+      System.out.println("Hmm. It seems you have slain one of my guards. Guard 2 Attack!");
+      pat.resetHealth();
+
+    } else {
+      System.out.println("Twas a valiant attempt!");
+      return false;
+    }
+    while(guard2.isAlive() && pat.isAlive()) {
+      while(true) {
+        try {
+          Dialogue.listOptions(pat);
+          
+          i = Integer.parseInt( in.readLine() );
+          if (i < (pat.attackTypes.length + 1) && i > 0) {
+            break;
+          } else {
+            System.out.println("Thee hath picked no valid option!");
+          }
+        }
+        catch ( Exception e ) {
+          System.out.println("Thee hath picked no number!");
+        }
+      }
+
+      
+      pat.setAttackType(pat.attackTypes[i - 1]);
+      
+      
+      Dialogue.dealDamage(pat, guard2);
+      
+    }
+    if (!guard2.isAlive()) {
+      System.out.println("Hmm. It seems you have slain both my guards. I guess it is time for me to attack!");
+      pat.resetHealth();
+
+    } else {
+      System.out.println("Twas a valiant attempt!");
+      return false;
+    }
+    System.out.println("I am much powerful than my guards. Don't think this will be easy.");
+    while(boss.isAlive() && pat.isAlive()) {
+      while(true) {
+        try {
+          Dialogue.listOptions(pat);
+          
+          i = Integer.parseInt( in.readLine() );
+          if (i < (pat.attackTypes.length + 1) && i > 0) {
+            break;
+          } else {
+            System.out.println("Thee hath picked no valid option!");
+          }
+        }
+        catch ( Exception e ) {
+          System.out.println("Thee hath picked no number!");
+        }
+      }
+
+      
+      pat.setAttackType(pat.attackTypes[i - 1]);
+      
+      
+      Dialogue.dealDamage(pat, boss);
+      
+    }
+    if (boss.isAlive()) {
+      System.out.println("Twas a valiant attempt!");
+      return false;
+    }
+
+    System.out.println("*Gasp* How is this possible? I-i am the MOST POWERFUL BEING IN THE UNIVERSE!");
+    System.out.println("I have one more attack left. Since I am dying I will perform my most powerful attack yet...");
+    System.out.println("SELF DESTRUCTION! MWAHAHAHA!");
+    System.out.println("*You frantically look around to try to escape but it is too late.*" +
+                         "\nGoodbye Hero. Boss utters this with his last breath and closes his eyes.");    
+                         
+    System.out.println("Boss performs his final attack: Self Destruction. Everything goes white.");
+    System.out.println("Press 1 to continue");
+    
+    for (;;) {
+      try {
+        i = Integer.parseInt( in.readLine() );
+        if (i != 1) {
+          System.out.println("Tis just one button... Try again");
+        } else {
+          break;
+        }
+
+      } catch (Exception o) {
+        System.out.println("Tis just one button... Try again");
+      }
+    }
+      System.out.print("\033[H\033[2J");
+      System.out.flush();
+    if (Shop.bought[5]) {
+      return true;
+    }
+
+    return false;
+    
+
+  }
   public void prestige() {
     String pick = "";
     String[] picks = {"",""};
@@ -296,31 +439,34 @@ public class YoRPG {
         System.out.println("Invalid Choice. Try Again!");
       }
     }
+    // VERY VERY INEFFICIENT
     if (picks[0].equals("Tank")) {
       if (pick.equals("1")) {
-        pat = new Tonk();
+        pat = new Tonk(pat.getMaxHealth(), pat.getStrength(), pat.getAttackRating(), pat.getDefense(), pat.getName(), pat.getLevel(), pat.getSpeed(), pat.getCoins());
       } else {
-        pat = new Fortress();
+        pat = new Fortress(pat.getMaxHealth(), pat.getStrength(), pat.getAttackRating(), pat.getDefense(), pat.getName(), pat.getLevel(), pat.getSpeed(), pat.getCoins());
       }
     } else if (picks[0].equals("Archer")) {
       if (pick.equals("1")) {
-        pat = new Sniper();
+        pat = new Sniper(pat.getMaxHealth(), pat.getStrength(), pat.getAttackRating(), pat.getDefense(), pat.getName(), pat.getLevel(), pat.getSpeed(), pat.getCoins());
       } else {
-        pat = new Gunner();
+        pat = new Gunner(pat.getMaxHealth(), pat.getStrength(), pat.getAttackRating(), pat.getDefense(), pat.getName(), pat.getLevel(), pat.getSpeed(), pat.getCoins());
       }
     } else if (picks[0].equals("Wizard")) {
       if (pick.equals("1")) {
-        pat = new Arcane();
+        pat = new Arcane(pat.getMaxHealth(), pat.getStrength(), pat.getAttackRating(), pat.getDefense(), pat.getName(), pat.getLevel(), pat.getSpeed(), pat.getCoins());
       } else {
-        pat = new Necromancer();
+        pat = new Necromancer(pat.getMaxHealth(), pat.getStrength(), pat.getAttackRating(), pat.getDefense(), pat.getName(), pat.getLevel(), pat.getSpeed(), pat.getCoins());
       }
     } else {
       if (pick.equals("1")) {
-        pat = new Paladin();
+        pat = new Paladin(pat.getMaxHealth(), pat.getStrength(), pat.getAttackRating(), pat.getDefense(), pat.getName(), pat.getLevel(), pat.getSpeed(), pat.getCoins());
       } else {
-        pat = new Barbarian();
+        pat = new Barbarian(pat.getMaxHealth(), pat.getStrength(), pat.getAttackRating(), pat.getDefense(), pat.getName(), pat.getLevel(), pat.getSpeed(), pat.getCoins());
       }
     }
+    System.out.println("\nYour new stats:\n" + pat.toString());
+    System.out.println("Congradulations on your new class. Enjoy 10 free coins that thee hath earned for prestiging");
   }
   
 
@@ -333,12 +479,20 @@ public class YoRPG {
     YoRPG game = new YoRPG();
 
     int encounters = 0;
-
+    
     while( encounters < MAX_ENCOUNTERS ) {
-    if ( !game.playTurn() )
-    break;
-    encounters++;
-    System.out.println();
+      if ( !game.playTurn() )
+        break;
+
+      encounters++;
+      System.out.println();
+    }
+    if (game.bossFight()) {
+      System.out.println("I see that you have survived. You might not know why have survive.");
+      System.out.println("It was since you purchased ?????. You have beaten YoRPG. I hope you have enjoyed this game");
+      System.out.println("\nBest, \nJason and Vansh");
+    } else {
+      System.out.println("Good luck next time.");
     }
 
     System.out.println( "Thy game doth be over." );

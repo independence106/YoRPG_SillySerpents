@@ -31,7 +31,7 @@ public class Ogre extends Monster {
           }
         } else {
           e.lowerHP(this.damage, this.getType());
-          System.out.println(this.name + " performs head bash!");
+          this.test = "\n" + this.type + " performs head bash! " + this.type + " attacks you";
         }
         return this.damage;
       }

@@ -31,13 +31,14 @@ public class Sniper extends Archer {
     this.name = name;
   }
   //HEY fix this:
-  public Sniper(int maxHealth, int strength, double attackRating, int defense, String name, int level) {
+  public Sniper(int maxHealth, int strength, double attackRating, int defense, String name, int level, int speed, int coins) {
     this.health = maxHealth;
     this.maxHealth = maxHealth;
     this.strength = strength + 60;
     this.attackRating = attackRating;
     this.speed = speed + 20;
     this.defense = defense + 5;
+    this.coins = coins;
     this.level = level;
     this.name = name;
     this.attackTypes = new String[] {"Snipe", "Speed Boost", "One Shot - One Kill"};

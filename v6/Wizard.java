@@ -5,6 +5,10 @@ public class Wizard extends Protagonist{
     super();
     this.defense = 0;
     this.health = 50;
+    this.maxHealth = 50;
+    this.strength = 50;
+    this.speed -= 20;
+    this.attackRating = 1.0;
     this.attackTypes = new String[] {"Fireball", "Vortex Summoning"};
   }
   public Wizard(String name) {
@@ -12,8 +16,8 @@ public class Wizard extends Protagonist{
     this.name = name;
 
   }
-  public Wizard(int health, int damage, int strength, double attackRating, int defense, String name, int level) {
-    super(health, damage, strength, attackRating, defense, name, level);
+  public Wizard(int health, int strength, double attackRating, int defense, String name, int level) {
+    super(health, strength, attackRating, defense, name, level);
   }
   public static String about() {
     return "\nAbrahahsdfa. Very forgetful about his spellbook" +

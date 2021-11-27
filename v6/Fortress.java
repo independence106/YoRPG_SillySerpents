@@ -25,7 +25,7 @@ public class Fortress extends Tank {
       this.name = name;
     }
     //HEY fix this:
-    public Fortress(int health, int damage, int strength, double attackRating, int defense, String name, int level) {
+    public Fortress(int maxHealth, int strength, double attackRating, int defense, String name, int level, int speed, int coins) {
       this.health = maxHealth + 300;
       this.maxHealth = maxHealth + 300;
       this.strength = strength - 25;
@@ -33,6 +33,7 @@ public class Fortress extends Tank {
       this.speed = speed - 15;
       this.defense = defense + 30;
       this.level = level;
+      this.coins = coins;
       this.name = name;
       this.attackTypes = new String[] {"Shield Throw", "Shield O' Life", "Shield Rain"};
     }
@@ -57,7 +58,7 @@ public class Fortress extends Tank {
         }
         this.damage = 0;
     } else {
-        this.test = "\nThee throws shield and hits " + e.getType() + " . Thee attacks ";
+        this.test = "\nThee throws shield and hits " + e.getType() + ". Thee attacks ";
         e.lowerHP(this.damage, this.getType());
       }
       return this.damage;

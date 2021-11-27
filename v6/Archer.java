@@ -18,8 +18,8 @@ public class Archer extends Protagonist{
     this();
     this.name = name;
   }
-  public Archer(int maxHealth, int damage, int strength, double attackRating, int defense, String name, int level) {
-    super(maxHealth, damage, strength, attackRating, defense, name, level);
+  public Archer(int maxHealth, int strength, double attackRating, int defense, String name, int level) {
+    super(maxHealth, strength, attackRating, defense, name, level);
   }
   
   public static String about() {
@@ -34,7 +34,7 @@ public class Archer extends Protagonist{
         this.speed += 1;
         this.damage /= 2;
         e.lowerHP(this.damage, this.getType());
-        this.test = "\nTraining with master elmo has paid off. Thy is now faster! " + this.getName() + " shoots ";
+        this.test = "\nTraining with master elmo has paid off. Thy is now faster! Speed +1! " + this.getName() + " shoots ";
     } else {
       this.test = "Steady...Aim...FIRE! " + this.getName() + " shoots ";
       e.lowerHP(this.damage, this.getType());

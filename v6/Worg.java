@@ -22,11 +22,12 @@ public class Worg extends Monster {
     public String getType() {
       return "Worg";
     }
-    public void lowerHP(int amount) {
+    public void lowerHP(int amount, String attackingClass) {
       if((Math.random() * speed) < 50) {
         this.health -= amount;
+        this.attackMiss = "";
       } else {
-        System.out.println("\nWorg too fast, attack has been missed!");
+        this.attackMiss = "\nWorg too fast, thy attack has been missed!";
       }
     }
     public static String about() {
@@ -43,6 +44,7 @@ public class Worg extends Monster {
             e.lowerHP(this.damage, this.getType());
           } 
         } else {
+          this.test = "\nWorg uses tis speed to attack thee. He attacks you";
           e.lowerHP(this.damage, this.getType());
          
         }

@@ -24,8 +24,17 @@ public class Paladin extends Swordsman {
       this.name = name;
     }
     //HEY fix this:
-    public Paladin(int health, int damage, int strength, double attackRating, int defense, String name, int level) {
-      super(health, damage, strength, attackRating, defense, name, level);
+    public Paladin(int maxHealth, int strength, double attackRating, int defense, String name, int level, int speed, int coins) {
+      this.health = maxHealth + 50;
+      this.maxHealth = maxHealth + 50;
+      this.strength = strength + 20;
+      this.attackRating = attackRating + 1;
+      this.speed = speed + 5;
+      this.defense = defense + 15;
+      this.coins = coins;
+      this.level = level;
+      this.name = name;
+      this.attackTypes = new String[] {"Swing", "RNGesus Super Sword Swing", "Holy Strike"};
     }
     public static String about() {
       return "Veteran warrior in the old holy campaigns against demons. Excellent warrior!";

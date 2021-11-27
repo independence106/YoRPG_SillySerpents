@@ -36,8 +36,17 @@ public class Necromancer extends Wizard {
       this.name = name;
     }
     //HEY fix this:
-    public Necromancer(int health, int damage, int strength, double attackRating, int defense, String name, int level) {
-      super(health, damage, strength, attackRating, defense, name, level);
+    public Necromancer(int maxHealth, int strength, double attackRating, int defense, String name, int level, int speed, int coins) {
+      this.health = maxHealth + 20;
+      this.maxHealth = maxHealth + 20;
+      this.strength = strength;
+      this.attackRating = attackRating + 0.4;
+      this.speed = speed;
+      this.defense = defense + 5;
+      this.coins = coins;
+      this.level = level;
+      this.name = name;
+      this.attackTypes = new String[] {"Fireball", "Vortex Summoning", "Undead Arise"};
     }
     public static String about() {
       return "Dabbled in the forbidden arts. Forever shunned by his wizard brethen. Powerful dark magic";

@@ -11,7 +11,7 @@ public class Shop {
     //(Only 1 shop allowed per game!)
     static String[] artifacts = {"Ring O Power", "Relic of TONKiness", "Gem of Confidence", "Heart of an Eagle", "Rabbit's foot", "?????"};
 
-    static int[] price = {10, 30, 80, 30, 5, 1000};
+    static int[] price = {10, 30, 80, 30, 5, 100};
     static int[] boost = {10, 20, 1, 50, 10, 1};
     static boolean[] bought = {false, false, false, false, false, false};
     
@@ -32,14 +32,14 @@ public class Shop {
         int pos = find(name);
         if (bought[pos]) {
             System.out.println("Thee hath already bought " + artifacts[pos]);
-        } else if (e.getCoins() <= price[pos]) {
+        } else if (e.getCoins() < price[pos]) {
             System.out.println("Hmm. Thee does not seem to have enough coins!");
         } else {
             e.giveCoins(-1 * price[pos]);
             System.out.println("Enjoy thy newly bought " + artifacts[pos] + "!");
             e.artifactChange(pos);
             bought[pos] = true;
-            e.update();
+            e.update(pos);
         }
 
 

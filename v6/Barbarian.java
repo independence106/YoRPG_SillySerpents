@@ -25,8 +25,17 @@ public class Barbarian extends Swordsman {
       this.name = name;
     }
     //HEY fix this:
-    public Barbarian(int health, int damage, int strength, double attackRating, int defense, String name, int level) {
-      super(health, damage, strength, attackRating, defense, name, level);
+    public Barbarian(int maxHealth, int strength, double attackRating, int defense, String name, int level, int speed, int coins) {
+      this.health = maxHealth + 25;
+      this.maxHealth = maxHealth + 25;
+      this.strength = strength + 40;
+      this.attackRating = attackRating + 0.9;
+      this.speed = speed + 10;
+      this.defense = defense + 5;
+      this.coins = coins;
+      this.level = level;
+      this.name = name;
+      this.attackTypes = new String[] {"Swing", "RNGesus Super Sword Swing", "Bloodlurst"};
     }
     public static String about() {
       return "\nCast out from the Holy armies. Learned from the dark forces to gain power. Very poweful attacks, not so much defense";

@@ -13,8 +13,10 @@ public class Character {
   protected int level;
   protected int speed;
   protected String type = "";
+  protected int coins;
 
   protected String test = "";
+  protected String attackMiss = "";
 
   final static String[] classTypes = {"Archer", "Sniper", "Gunner", "Tank", "Tonk", "Fortress", "Wizard", "Arcane", "Necromancer", "Swordsman", "Paladin", "Barbarian"};
 
@@ -26,11 +28,12 @@ public class Character {
     this.level = 0;
     this.maxHealth = 100;
     this.attackState = "0";
-    this.defense = 1;
+    this.defense = 5;
     this.attackRating = 0.5;
     this.strength = 30;
     this.speed = 50;
     this.type = this.getClass().getSimpleName();
+    this.coins = 0;
     
   }
   public Character(String name) {
@@ -59,6 +62,9 @@ public class Character {
   public int getMaxHealth() {
     return this.maxHealth;
   }
+  public int getCoins() {
+    return this.coins;
+  }
   public int getDefense() {
     return this.defense; 
   }
@@ -81,6 +87,7 @@ public class Character {
     return this.attackState;
   }
   public void getAttackType() {
+    System.out.println("\n");
     for (int i = 0; i < this.attackTypes.length; i++) {
       System.out.println((i + 1) + ". " + attackTypes[i]);
     }
@@ -98,15 +105,17 @@ public class Character {
   public void lowerHP(int amount) {
     if((Math.random() * speed) < 50) {
       this.health -= amount;
+      this.attackMiss = "";
     } else {
-      System.out.println("\nThy speed has prevented thee from taking damage! Lucky!");
+      this.attackMiss = "\nThy speed has prevented thee from taking damage! Lucky!";
     }
   }
   public void lowerHP(int amount, String attackingClass) {
     if((Math.random() * speed) < 50) {
       this.health -= amount;
+      this.attackMiss = "";
     } else {
-      System.out.println("\nThy speed has prevented thee from taking damage! Lucky!");
+      this.attackMiss = "\n" + this.type + " speed has prevented thee from taking damage! Lucky!";
     }
   }
   public boolean isAlive() {
@@ -117,6 +126,9 @@ public class Character {
     if (this.damage <= 0) {
       this.damage = 5;
     }
+  }
+  public void giveCoins(int coins) {
+    this.coins += coins;
   }
   public void increaseLevel(int health, int strength) {
     this.maxHealth += health;

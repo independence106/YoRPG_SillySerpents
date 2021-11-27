@@ -6,10 +6,12 @@ public class Swordsman extends Protagonist{
     this.attackTypes = new String[] {"Swing", "RNGesus Super Sword Swing"};
   }
   public Swordsman(String name) {
-    super(name);
+    this();
+    this.name = name;
+    this.attackTypes = new String[] {"Swing", "RNGesus Super Sword Swing"};
   }
-  public Swordsman(int health, int damage, int strength, double attackRating, int defense, String name, int level) {
-    super(health, damage, strength, attackRating, defense, name, level);
+  public Swordsman(int health, int strength, double attackRating, int defense, String name, int level) {
+    super(health, strength, attackRating, defense, name, level);
   }
   public static String about() {
     return "\nMe bash head. Quite literally, this class is a well built class" + 
@@ -20,7 +22,8 @@ public class Swordsman extends Protagonist{
     if (attackState.equals("RNGesus Super Sword Swing")) {
       //System.out.println("Swinging Hammer...");
       int amplifier = (int) (Math.random() * 10);
-      if (amplifier > 5) {
+      
+      if (amplifier > 3) {
         this.damage += amplifier * 2;
         e.lowerHP(this.damage, this.getType());
         this.test = "\nWOWEE! Thy gods have blessed thee I see! Extra DAMAGE! You attack ";

@@ -25,8 +25,18 @@ public class Arcane extends Wizard {
       this.name = name;
     }
     //HEY fix this:
-    public Arcane(int health, int damage, int strength, double attackRating, int defense, String name, int level) {
-      super(health, damage, strength, attackRating, defense, name, level);
+    public Arcane(int maxHealth, int strength, double attackRating, int defense, String name, int level, int speed, int coins) {
+      this.health = maxHealth + 10;
+      this.maxHealth = maxHealth + 10;
+      this.strength = strength + 60;
+      this.attackRating = attackRating + 0.7;
+      this.speed = speed - 5;
+      this.defense = defense + 1;
+      this.coins = coins + 10;
+      this.level = level;
+      this.name = name;
+      this.attackTypes = new String[] {"Bash", "specialize"};
+
     }
     public static String about() {
       return "Went to wizandia to study under the great wizards Tiggy and Tiffany. Came back with a new arsenal of spells";

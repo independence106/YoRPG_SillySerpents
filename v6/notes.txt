@@ -1,7 +1,7 @@
 v6 updates: 
     - Shop Class <--- Done 
     - Dialogue Class (chooser for attacks some some subclasses have 2 Specials) <-- Done
-    - Class selection at lev 5??? <-- WIP
+    - Class selection at lev 5??? <-- DONE FINALLY
     - More monster subclasses <-- Not Done
 
 
@@ -12,4 +12,3 @@ Class Updates:
                   to Sniper. This is due to Sniper having 60 extra base strength. Which also means
                   that items and whatnot are also carried on over. I feel like this won't be detrimental 
                   to players who might see the first 5 levels are "trash". 
-                  
