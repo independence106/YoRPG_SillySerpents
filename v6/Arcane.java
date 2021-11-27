@@ -43,20 +43,5 @@ public class Arcane extends Wizard {
       }
       return this.damage;
     }
-    public static void main(String[] args) {
-        Monster elmo = new Monster();
-        Tonk tonky = new Tonk();
-        tonky.specialize();
-        System.out.println(tonky.attack(elmo));
-        System.out.println(tonky.attack(elmo));
-        System.out.println(tonky.attack(elmo));
-        System.out.println(tonky.attack(elmo));
-        System.out.println(tonky.attack(elmo));
-        System.out.println(tonky.attack(elmo));
-        System.out.println(tonky.attack(elmo));
-        System.out.println(tonky.attack(elmo));
-        System.out.println(tonky.attack(elmo));
-        System.out.println(tonky.attack(elmo));
-    }
   }
   

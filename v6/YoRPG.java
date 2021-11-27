@@ -108,7 +108,8 @@ public class YoRPG {
     }
       
     this.pickAClass(name);
-  
+    System.out.println("Hi");
+    this.prestige();
     
 
     
@@ -127,7 +128,7 @@ public class YoRPG {
     int i = 1;
     int f = 1;
     int d1, d2;
-    prestige();
+    
     if ( Math.random() >= ( difficulty / 3.0 ) )
 	    System.out.println( "\nNothing to see here. Move along!" );
     else {
@@ -275,7 +276,10 @@ public class YoRPG {
      }
   }
   public void prestige() {
+    String pick = "";
+    String[] picks = {"",""};
     System.out.println("\nYour current class : " + pat.getType());
+    picks[0] = pat.getType();
     System.out.println("\n\nDear Adventurer, you have reached the point where you can prestige! Choose wisely!");
     int pos = 0;
     for (int i = 0; i < Character.classTypes.length; i++) {
@@ -286,7 +290,39 @@ public class YoRPG {
     System.out.println("\nHere are your available classes!" +
                        "\n\t1. " + Character.classTypes[pos + 1] + 
                        "\n\t2. " + Character.classTypes[pos + 2]);
-    
+    for (;;) {
+      try {
+        pick = in.readLine();
+        break;
+      } catch (Exception o) {
+        System.out.println("Invalid Choice. Try Again!");
+      }
+    }
+    if (picks[0].equals("Tank")) {
+      if (pick.equals("1")) {
+        pat = new Tonk();
+      } else {
+        pat = new Fortress();
+      }
+    } else if (picks[0].equals("Archer")) {
+      if (pick.equals("1")) {
+        pat = new Sniper();
+      } else {
+        pat = new Gunner();
+      }
+    } else if (picks[0].equals("Wizard")) {
+      if (pick.equals("1")) {
+        pat = new Arcane();
+      } else {
+        pat = new Necromancer();
+      }
+    } else {
+      if (pick.equals("1")) {
+        pat = new Paladin();
+      } else {
+        pat = new Barbarian();
+      }
+    }
   }
   
 
