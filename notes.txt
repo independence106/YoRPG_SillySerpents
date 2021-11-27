@@ -6,11 +6,14 @@ QCC:
 -n/a
 
 
+v5 - last version before eliminating lucky attack option!
 
 THINGS WE NEED TO FIX:
 (Below)
 -fix bugs
 
+
+-Dodge has problem where it can show up before monster attacks so it looks really weird
 -clean up code
 -ALSO WHEN ATTACKING HAVE THEM LIST ALL OPTIONS AVAILBALE TO THAT ONE CLASS!!!
 
@@ -22,19 +25,7 @@ THINGS WE NEED TO FIX:
 
 Subclasses:
 (Specials unlocked at level 5)
-Tank:
-  - 200 HP
-  - 20 Def
-  - 50 Strength
-  - 0.5 Attack Rating
-  - Speed SHOULD BE 20
 
-  Specials:
-  -Holy Shield:
-    // need to fix, so only till max health
-    -Heal 20 HP
-  //future
-  -
 
 Archer:
   Base:
@@ -110,7 +101,7 @@ Wizard:
     - 100 strength
     - 15 speed
     Special: Vortex Summoning
-    - Deal an extra 20 true damage
+    - Deal an extra 15 true damage
 
     Arcane Wizard: (Completely ignores armor)
     - 60 health 

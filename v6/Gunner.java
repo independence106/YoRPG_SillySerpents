@@ -21,6 +21,7 @@ public class Gunner extends Archer {
       if (this.getSpeed() > 20) {
         this.speed -= 20;
       }
+      this.attackTypes = new String[] {"Shoot", "Chug Jug", "Burst"};
       this.defense = 10;
     }
     public Gunner(String name) {
@@ -37,27 +38,30 @@ public class Gunner extends Archer {
     public int attack(Character e) {
       calcNewDamage(this, e);
       if (turnCounter == 3) {
-        if (attackState.equals("specialize")) {
+        if (attackState.equals("Chug Jug")) {
             this.speed += 1;
             e.lowerHP(this.damage, this.getType());
-            System.out.println("\nTraining with master elmo has paid off. Thy is now faster!");
-        } else if(attackState.equals("3")) {
+            this.test = "\nTraining with master elmo has paid off. Thy is now faster! " + this.getName() + " shoots ";
+        } else if(attackState.equals("Burst")) {
           double RNGesus = Math.random();
-          if (RNGesus < 0.99) {
-            System.out.println("Yiko! Thy weapon hath jammed!");
-            e.lowerHP(e.getHealth(), this.getType());
+          if (RNGesus < 0.1) {
+            this.test = "\nYiko! Thy weapon hath jammed! Thee attacks ";
+            this.damage = 0;
+            turnCounter = 0;
           } else {
-            System.out.println("Jenking Jillies! Thy gun hath overclocked! Spray! Spray thy projectiles on thy enemies!");
-            e.lowerHP(this.damage * 3, this.getType());
+            this.test = "\nJenking Jillies! Thy gun hath overclocked! Spray! Spray thy projectiles on thy enemies! Thee attacks ";
+            this.damage *= 3;
+            e.lowerHP(this.damage, this.getType());
           }
         } else {
+          this.test = "\nThee fills " + e.getType() + " with lead. You attack ";
           e.lowerHP(this.damage, this.getType());
         }
         
-        turnCounter = 0;
+        
         return this.damage;
       } else {
-        System.out.println("Still jammed! " + (3 - turnCounter) + " turns to go!");
+        this.test = "Still jammed! " + (3 - turnCounter) + " turns to go! Thus you attack ";
         turnCounter++;
         return 0;
       }

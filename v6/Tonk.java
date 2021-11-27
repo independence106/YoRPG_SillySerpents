@@ -12,6 +12,7 @@ public class Tonk extends Tank {
     
     private boolean taunt = true;
     private int counter = 0;
+
     public Tonk() {
       super();
       this.strength = 25;
@@ -20,6 +21,7 @@ public class Tonk extends Tank {
       this.attackRating = 0.4;
       this.speed -= 5;
       this.defense = 30;
+      this.attackTypes = new String[] {"Shield Slap", "Shield O' Life", "Taunt"};
     }
     public Tonk(String name) {
       this();
@@ -35,48 +37,54 @@ public class Tonk extends Tank {
     public boolean getTauntStatus() {
         return taunt;
     }
+    public void lowerHP(int amount, String attackingClass) {
+      if (taunt == true) {
+        System.out.println("Ha! Thy taunt enrages puny monsters and thee takes no damage!");
+      } else {
+        if((Math.random() * speed) < 50) {
+          this.health -= amount;
+        } else {
+          System.out.println("\nThy speed has prevented thee from taking damage! Lucky!");
+        }
+      }
+    }
     public int attack(Character e) {
       calcNewDamage(this, e);
-      if (attackState.equals("specialize")) {
+      if (attackState.equals("Taunt")) {
         //System.out.println("Swinging Hammer...");
         //ALWAYS ROUNDS TO NEAREST!!!
         double RNGesus = Math.random();
-        if (RNGesus > 0.5) {
+        if (counter < 4 && counter > 0) {
+          this.test = "\nCannot use ability tant for " + (4 - counter) + " turns. You attack ";
+        } else if (RNGesus > 0.5) {
             if (counter >= 4) {
                 taunt = false;
                 counter = 0;
             }
             if (counter == 0) {
-                System.out.println("You hath taunted thy enemy");
+                this.test = "\nYou hath taunted thy enemy. You attack ";
                 taunt = true;
-            } else {
-                System.out.println("Cannot use ability tant for " + (4 - counter) + " turns.");
-            }
+            } 
         } else {
-            System.out.println("Taunt ability hath failed and you doth dealt no damage");
+            this.test = "\nTaunt ability hath failed and you doth dealt no damage. Thee attacks ";
         }
+        this.damage = 0;
 
+      } else if (attackState.equals("Shield O' Life")) {
+        if ((this.maxHealth - this.health ) > 20) {
+          this.health += 20;
+          this.test = "\nYoug hath used shield o' life! Heal thyself for 20HP! Thee attacks ";
+        } else {
+          this.health = this.maxHealth;
+          this.test = "\nYoug hath used shield o' life! Heal thyself to max health for " + (this.maxHealth - this.health) + "HP! Thee attacks ";
+        }
+        this.damage = 0;
       } else {
-        System.out.println("They hath swung shiled");
+        this.test = "\nThy hath swung shield and attacked ";
         e.lowerHP(this.damage, this.getType());
       }
       counter++;
       return this.damage;
-    }
-    public static void main(String[] args) {
-        Monster elmo = new Monster();
-        Tonk tonky = new Tonk();
-        tonky.specialize();
-        System.out.println(tonky.attack(elmo));
-        System.out.println(tonky.attack(elmo));
-        System.out.println(tonky.attack(elmo));
-        System.out.println(tonky.attack(elmo));
-        System.out.println(tonky.attack(elmo));
-        System.out.println(tonky.attack(elmo));
-        System.out.println(tonky.attack(elmo));
-        System.out.println(tonky.attack(elmo));
-        System.out.println(tonky.attack(elmo));
-        System.out.println(tonky.attack(elmo));
     }
   }
   

@@ -29,6 +29,7 @@ public class Necromancer extends Wizard {
       this.maxHealth = 70;
       this.attackRating = 1.4;
       this.defense += 5;
+      this.attackTypes = new String[] {"Fireball", "Vortex Summoning", "Undead Arise"};
     }
     public Necromancer(String name) {
       this();
@@ -43,51 +44,42 @@ public class Necromancer extends Wizard {
     }
     public void lowerHP(int amount, String attackingClass) {
       if (numOUndeads > 0) {
+        System.out.println("Ha but luckily thee undead saves thy and takes thy damage!");
         blake.lowerHP(amount, attackingClass);
         if (!blake.isAlive()) {
+          System.out.println("Alast, thy undead was not strong enough and died!");
           numOUndeads--;
         }
       } else {
-        System.out.println("doing this");
         this.health -= amount;
       }
       
     }
     public int attack(Character e) {
       calcNewDamage(this, e);
-      if (attackState.equals("specialize")) {
+      if (attackState.equals("Undead Arise")) {
         //System.out.println("Swinging Hammer...");
         //ALWAYS ROUNDS TO NEAREST!!!
         if (numOUndeads < 1) {
-            System.out.println("doing this");
-            numOUndeads++;
+          this.test = "\nThee summons an undead! Thee attacks ";
+          this.damage = 0;
+          numOUndeads++;
         } else {
-          System.out.println("Yikes! Thee skill cannot summon more than 2 undeads!");
+          this.test = "\nYikes! Thee skill cannot summon more than 2 undeads! Thee instead attacks ";
           e.lowerHP(this.damage, this.getType());
-          
         }
+      } else if (attackState.equals("Vortex Summoning")) {
+        this.damage += 15;
+        e.lowerHP(this.damage, this.getType());
+        this.test = "\nThy has summoned new vortex from dimension! Thee attacks ";
       } else {
-        System.out.println("They hath swung shiled");
+        this.test = "\nThy hath conjured fireball and attacked ";
         e.lowerHP(this.damage, this.getType());
       }
       return this.damage;
     }
     public static void main(String[] args) {
-        Monster elmo = new Monster();
-        Necromancer tonky = new Necromancer();
-
-        tonky.specialize();
-        System.out.println(tonky.attack(elmo));
-        System.out.println(tonky.numOUndeads);
-        System.out.println(elmo.attack(tonky));
-        System.out.println(tonky.health);
-        System.out.println(elmo.attack(tonky));
-        System.out.println(elmo.attack(tonky));
-        System.out.println(elmo.attack(tonky));
-        System.out.println(elmo.attack(tonky));
-        System.out.println(elmo.attack(tonky));
-        System.out.println(tonky.blake.isAlive());
-        System.out.println(tonky.health);
+      
     }
   }
   

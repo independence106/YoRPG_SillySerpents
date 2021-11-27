@@ -22,6 +22,8 @@ public class Sniper extends Archer {
     this.attackRating = 1.0;
     this.speed += 20;
     this.defense = 10;
+    this.attackTypes = new String[] {"Snipe", "Speed Boost", "One Shot - One Kill"};
+    
   }
   public Sniper(String name) {
     this();
@@ -36,29 +38,31 @@ public class Sniper extends Archer {
   }
   public int attack(Character e) {
     calcNewDamage(this, e);
-    if (turnCounter == 1) {
+    if (turnCounter == 0) {
       if (attackState.equals("specialize")) {
           this.speed += 1;
+          this.damage /= 2;
+          this.test = "\nTraining with master elmo has paid off. Thy is now faster! However you are tired and shoot ";
           e.lowerHP(this.damage, this.getType());
-          System.out.println("\nTraining with master elmo has paid off. Thy is now faster!");
-      } else if(attackState.equals("3")) {
+
+      } else if(attackState.equals("One Shot - One Kill")) {
         double RNGesus = Math.random();
         if (RNGesus < 0.34) {
-          System.out.println("Insert cool thing here");
+          this.test = "You hear the crack of thy musket as thy bullet wizzes through the art and pierces " + e.getType() + ". Thy shot hits ";
           e.lowerHP(e.getHealth(), this.getType());
         } else {
-          System.out.println("Yikes! Your bullet only grazed " + e.getType());
+          this.test = "\nYikes! Your bullet only grazed ";
           e.lowerHP(this.damage / 3, this.getType());
         }
       } else {
         e.lowerHP(this.damage, this.getType());
       }
       
-      turnCounter = 0;
+      turnCounter = 1;
       return this.damage;
     } else {
-      System.out.println("Reloading shot...");
-      turnCounter = 1;
+      this.test = "\nReloading Shot . . . Thee cannot attack! You attack ";
+      turnCounter = 0;
       return 0;
     }
   }

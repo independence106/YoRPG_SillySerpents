@@ -107,36 +107,7 @@ public class YoRPG {
       }
     }
       
-             
-    System.out.println("Please choose thy starting class!" +
-                       "\n\t1. Tank\n\t2. Archer\n\t3. Wizard"
-                       + "\n\t4. Swordsman"); 
-        for (;;) {
-            try {
-                classPick = in.readLine();
-                if (classPick.equals("1")) {
-                    yo.pat = new Tank(yo.pat.name);
-                    break;
-                } else if (classPick.equals("2")) {
-                    e = new Archer(name);
-                    break;
-                } else if (classPick.equals("3")) {
-                    e = new Wizard(name);
-                    break;
-                } else if (classPick.equals("4")) {
-                    e = new Swordsman(name);
-                    break;
-                } else if (classPick.equals("info")) {
-                    System.out.println(
-                        Tank.about() + Archer.about() + Wizard.about() + Swordsman.about()    
-                    );
-                } else {
-                    System.out.println("Thy pick is not valid! Again!");
-                }   
-            } catch (Exception m) {
-                System.out.println("Thy pick is not valid! Again!");
-            }
-        }
+    this.pickAClass(name);
   
     
 
@@ -156,7 +127,7 @@ public class YoRPG {
     int i = 1;
     int f = 1;
     int d1, d2;
-
+    prestige();
     if ( Math.random() >= ( difficulty / 3.0 ) )
 	    System.out.println( "\nNothing to see here. Move along!" );
     else {
@@ -169,6 +140,8 @@ public class YoRPG {
         smaug = new Bandit("smaug");
       }
       System.out.println( "\nLo, yonder " + smaug.getType() + " approacheth!" );
+
+      
 	    while( smaug.isAlive() && pat.isAlive() ) {
 
         // Give user the option of using a special attack:
@@ -176,10 +149,10 @@ public class YoRPG {
         // ...but if you get hit, you take more damage.
         while(true) {
           try {
-            System.out.println( "\nDo you feel lucky?" );
-            System.out.println( "\t1: Nay.\n\t2: Aye!" );
+            Dialogue.listOptions(pat);
+            
             i = Integer.parseInt( in.readLine() );
-            if (i < 3 && i > 0) {
+            if (i < (pat.attackTypes.length + 1) && i > 0) {
               break;
             } else {
               System.out.println("Thee hath picked no valid option!");
@@ -190,11 +163,10 @@ public class YoRPG {
           }
         }
 
-        if ( i == 2 )
-          pat.specialize();
-        else
-          pat.normalize();
-
+        
+        pat.setAttackType(pat.attackTypes[i - 1]);
+        
+        
         Dialogue.dealDamage(pat, smaug);
         
         
@@ -217,6 +189,7 @@ public class YoRPG {
             System.out.println("Thee hath picked no number!");
           }
         }
+
         if (f == 1) {
           pat.increaseLevel(10, 0);
         } else {
@@ -268,7 +241,54 @@ public class YoRPG {
     return true;
   }//end playTurn()
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  public void pickAClass(String name) {
+    //If I ever move anything I can utilize this or smthing
 
+     System.out.println("Please choose thy starting class!" +
+                    "\n\t1. Tank\n\t2. Archer\n\t3. Wizard"
+                    + "\n\t4. Swordsman"); 
+     for (;;) {
+         try {
+             classPick = in.readLine();
+              if (classPick.equals("1")) {
+                 pat = new Tank(name);
+                 break;
+             } else if (classPick.equals("2")) {
+                 pat = new Archer(name);
+                 break;
+             } else if (classPick.equals("3")) {
+                 pat = new Wizard(name);
+                 break;
+             } else if (classPick.equals("4")) {
+                 pat = new Swordsman(name);
+                 break;
+             } else if (classPick.equals("info")) {
+                 System.out.println(
+                     Tank.about() + Archer.about() + Wizard.about() + Swordsman.about()    
+                 );
+            } else {
+                System.out.println("Thy pick is not valid! Again!");
+            }   
+        } catch (Exception m) {
+            System.out.println("Thy pick is not valid! Again!");
+        }
+     }
+  }
+  public void prestige() {
+    System.out.println("\nYour current class : " + pat.getType());
+    System.out.println("\n\nDear Adventurer, you have reached the point where you can prestige! Choose wisely!");
+    int pos = 0;
+    for (int i = 0; i < Character.classTypes.length; i++) {
+      if (Character.classTypes[i].equals(pat.getType())) {
+        pos = i;
+      }
+    }
+    System.out.println("\nHere are your available classes!" +
+                       "\n\t1. " + Character.classTypes[pos + 1] + 
+                       "\n\t2. " + Character.classTypes[pos + 2]);
+    
+  }
+  
 
   public static void main( String[] args ) {
     //As usual, move the begin-comment bar down as you progressively

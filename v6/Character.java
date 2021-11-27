@@ -16,6 +16,8 @@ public class Character {
 
   protected String test = "";
 
+  final static String[] classTypes = {"Archer", "Sniper", "Gunner", "Tank", "Tonk", "Fortress", "Wizard", "Arcane", "Necromancer", "Swordsman", "Paladin", "Barbarian"};
+
   protected String[] attackTypes = {"Bash", "RNGesus Bash"};
 
   public Character() {
@@ -23,7 +25,7 @@ public class Character {
     this.damage = 15;
     this.level = 0;
     this.maxHealth = 100;
-    this.attackState = "normalize";
+    this.attackState = "0";
     this.defense = 1;
     this.attackRating = 0.5;
     this.strength = 30;
@@ -44,7 +46,7 @@ public class Character {
     this.name = name;
     this.level = level;
     this.maxHealth = health;
-    this.attackState = "normalize";
+    this.attackState = "0";
     this.speed = 50;
     this.type = this.getClass().getSimpleName();
   }
@@ -79,6 +81,11 @@ public class Character {
   public String getAttackState() {
     return this.attackState;
   }
+  public void getAttackType() {
+    for (int i = 0; i < this.attackTypes.length; i++) {
+      System.out.println((i + 1) + ". " + attackTypes[i]);
+    }
+  }
   
   public String toString() {
     return "Name: " + getName() + "\nLevel: " + this.level + 
@@ -86,11 +93,8 @@ public class Character {
            this.attackState + "\nAttack Rating: " + (Math.round(this.attackRating * 100.0) /100.0)
            + "\nStrength: " + this.strength + "\nSpeed: " + this.speed;
   }
-  public void specialize() {
-    this.attackState = "specialize";
-  }
-  public void normalize() {
-    this.attackState = "normalize";
+  public void setAttackType(String type) {
+    this.attackState = type;
   }
   public void lowerHP(int amount) {
     if((Math.random() * speed) < 50) {
@@ -126,20 +130,20 @@ public class Character {
   
   public int attack(Character e) {
     calcNewDamage(this, e);
-    if (attackState.equals("specialize")) {
+    if (attackState.equals("RNGesus Bash")) {
       //System.out.println("Swinging Hammer...");
       int amplifier = (int) (Math.random() * 10);
       if (amplifier > 5) {
-        damage += amplifier * 2;
+        this.damage += amplifier * 2;
         e.lowerHP(this.damage, this.getType());
-        test = "WOWEE! Thy gods have blessed thee I see! Extra DAMAGE!";
-        System.out.println("WOWEE! Thy gods have blessed thee I see! Extra DAMAGE!");
+        this.test = "WOWEE! Thy gods have blessed thee I see! Extra DAMAGE! You attack ";
       } else {
-        System.out.println("Youg swung too hard, and bashed thy skull. Ye lost 5 health!");
+        this.test = "Youg swung too hard, and bashed thy skull. Ye lost 5 health! You attack ";
         lowerHP(5);
         e.lowerHP(this.damage, this.getType());
       }
     } else {
+      this.test = "You swing with thy club and attack ";
       e.lowerHP(this.damage, this.getType());
     }
     return this.damage;

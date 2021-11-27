@@ -1,18 +1,4 @@
-V5 updates:
-
-- subclasses to Protag:
-    - Arcane (not finished)
-    - Necromancer (almost finished) 
-    - Tonk
-    - Fortress
-    - Paladin
-    - Barbarian
-    - Sniper
-    - Gunner
-
-
-
-Planned v6 updates: 
+v6 updates: 
     - Shop Class 
     - Dialogue Class (chooser for attacks some some subclasses have 2 Specials) 
     - Class selection at lev 5???

@@ -18,6 +18,7 @@ public class Arcane extends Wizard {
       this.attackRating = 1.7;
       this.speed -= 5;
       this.defense += 1;
+      this.attackTypes = new String[] {"Bash", "specialize"};
     }
     public Arcane(String name) {
       this();

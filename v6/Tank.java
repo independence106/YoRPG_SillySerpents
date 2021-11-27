@@ -8,6 +8,7 @@ public class Tank extends Protagonist{
     this.defense = 20;
     this.attackRating = 0.5;
     this.strength = 50;
+    this.attackTypes = new String[] {"Shield Slap", "Shield O' Life"};
   }
   public Tank(String name) {
     this();
@@ -23,16 +24,20 @@ public class Tank extends Protagonist{
   }
   public int attack(Character e) {
     calcNewDamage(this, e);
-    if (attackState.equals("specialize")) {
-        this.health += 20;
-        
-        System.out.println("Youg hath used shield o' life! Heal thyself for 20HP!");
-        return 0;
-      } else {
-        e.lowerHP(this.damage, this.getType());
-      return this.damage;
+    if (attackState.equals("Shield O' Life")) {
+        if ((this.maxHealth - this.health ) > 20) {
+          this.health += 20;
+          this.test = "\nYoug hath used shield o' life! Heal thyself for 20HP! Thee attacks ";
+        } else {
+          this.health = this.maxHealth;
+          this.test = "\nYoug hath used shield o' life! Heal thyself to max health for " + (this.maxHealth - this.health) + "HP! Thee attacks ";
+        }
+        this.damage = 0;
+    } else {
+        this.test = "\nThee slaps " + e.getType() + " . Thee attacks ";
+        e.lowerHP(this.damage, this.getType()); 
     }
-    
+    return this.damage;
     
     
   }

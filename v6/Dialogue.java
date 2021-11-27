@@ -31,8 +31,10 @@ public class Dialogue {
                             "\nAdditionally thy battle rating hath increased by 0.1" +
                             "\n\t1: Gain 10 health.\n\t2: Gain 10 strength.");
     }
-    public static void listAttackOptions() {
-
+    public static void listOptions(Character e) {
+        
+        e.getAttackType();
+        System.out.println("Choose thy attack!");
     }
     public static void main(String[] args) {
         Archer elmo = new Archer("halleluga");

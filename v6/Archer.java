@@ -10,6 +10,8 @@ public class Archer extends Protagonist{
     this.attackRating = 1.0;
     this.speed = 50;
     this.defense = 5;
+    this.attackTypes = new String[] {"Snipe", "Speed Boost"};
+    this.attackState = "0";
 
   }
   public Archer(String name) {
@@ -26,11 +28,13 @@ public class Archer extends Protagonist{
   
   public int attack(Character e) {
     calcNewDamage(this, e);
-    if (attackState.equals("specialize")) {
+    if (attackState.equals("Speed Boost")) {
         //yes stackable speed is intended
+        //only will do 1/2 damage
         this.speed += 1;
+        this.damage /= 2;
         e.lowerHP(this.damage, this.getType());
-        this.test = "\nTraining with master elmo has paid off. Thy is now faster!";
+        this.test = "\nTraining with master elmo has paid off. Thy is now faster! " + this.getName() + " shoots ";
     } else {
       this.test = "Steady...Aim...FIRE! " + this.getName() + " shoots ";
       e.lowerHP(this.damage, this.getType());

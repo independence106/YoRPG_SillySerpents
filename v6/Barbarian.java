@@ -18,6 +18,7 @@ public class Barbarian extends Swordsman {
       this.attackRating = 1.4;
       this.speed += 10;
       this.defense = 10;
+      this.attackTypes = new String[] {"Swing", "RNGesus Super Sword Swing", "Bloodlurst"};
     }
     public Barbarian(String name) {
       this();
@@ -28,19 +29,32 @@ public class Barbarian extends Swordsman {
       super(health, damage, strength, attackRating, defense, name, level);
     }
     public static String about() {
-      return "Cast out from the Holy armies. Learned from the dark forces to gain power. Very poweful attacks, not so much defense";
+      return "\nCast out from the Holy armies. Learned from the dark forces to gain power. Very poweful attacks, not so much defense";
     }
     public int attack(Character e) {
       calcNewDamage(this, e);
-      if (attackState.equals("specialize")) {
+      if (attackState.equals("Bloodlurst")) {
         //System.out.println("Swinging Hammer...");
         //ALWAYS ROUNDS TO NEAREST!!!
         double percentageOHealthDivided5 = (1 - ((this.health * 1.0) / (this.maxHealth * 1.0))) / 0.05;
         calcNewDamage(this, e);
         this.damage = (int) (Math.round(this.damage * (1 + 0.02 * (percentageOHealthDivided5))));
+        this.test = "\nGARAGH. You deal " + (Math.round(0.02 * percentageOHealthDivided5 * 100) / 100.0) * 100.0 + " percent more damage! You attack ";
         e.lowerHP(this.damage, this.getType());
 
+      } else if (attackState.equals("RNGesus Super Sword Swing")) {
+        int amplifier = (int) (Math.random() * 10);
+        if (amplifier > 5) {
+          this.damage += amplifier * 2;
+          e.lowerHP(this.damage, this.getType());
+          this.test = "\nWOWEE! Thy gods have blessed thee I see! Extra DAMAGE! You attack ";
+        } else {
+          this.test = "\nYoug swung too hard, and bashed thy skull. Ye lost 5 health! You attack ";
+          lowerHP(5);
+          this.damage = 0;
+        }
       } else {
+        this.test = "You swing thy axe and attack ";
         e.lowerHP(this.damage, this.getType());
       }
       return this.damage;

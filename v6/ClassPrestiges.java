@@ -10,9 +10,12 @@ public class ClassPrestiges {
     
     static String classPick;
 
+    static String[] basicClasses = {"Archer", "Swordsman", "Tank", "Wizard"};
+
     public ClassPrestiges() {
 
     }
+
     public static void pickAClass(YoRPG yo) {
         //If I ever move anything I can utilize this or smthing
 

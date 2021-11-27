@@ -30,7 +30,7 @@ public class Monster extends Character {
         e.lowerHP(this.damage, this.getType());
       }
     } else {
-      test = "\nMonster grabs you, shakes you around and throws you against a rock";
+      this.test = "\nMonster grabs you, shakes you around and throws you against a rock";
       e.lowerHP(this.damage, this.getType());
     }
     return this.damage;

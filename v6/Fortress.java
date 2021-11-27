@@ -18,6 +18,7 @@ public class Fortress extends Tank {
       this.attackRating = 0.3;
       this.speed -= 15;
       this.defense = 50;
+      this.attackTypes = new String[] {"Shield Throw", "Shield O' Life", "Shield Rain"};
     }
     public Fortress(String name) {
       this();
@@ -32,13 +33,23 @@ public class Fortress extends Tank {
     }
     public int attack(Character e) {
       calcNewDamage(this, e);
-      if (attackState.equals("specialize")) {
+      if (attackState.equals("Shield Rain")) {
         //System.out.println("Swinging Hammer...");
         //ALWAYS ROUNDS TO NEAREST!!!
-        System.out.println("Thee hath called upon thy fellow shields to strike");
+        this.test = "\nThee hath called upon thy fellow shields to strike. Thee attacks ";
         this.damage = 20;
-      } else {
-        System.out.println("They hath swung shiled");
+        e.lowerHP(this.damage, this.getType());
+      } else if (attackState.equals("Shield O' Life")) {
+        if ((this.maxHealth - this.health ) > 20) {
+          this.health += 20;
+          this.test = "\nYoug hath used shield o' life! Heal thyself for 20HP! Thee attacks ";
+        } else {
+          this.test = "\nYoug hath used shield o' life! Heal thyself to max health for " + (this.maxHealth - this.health) + "HP! Thee attacks ";
+          this.health = this.maxHealth;
+        }
+        this.damage = 0;
+    } else {
+        this.test = "\nThee throws shield and hits " + e.getType() + " . Thee attacks ";
         e.lowerHP(this.damage, this.getType());
       }
       return this.damage;
