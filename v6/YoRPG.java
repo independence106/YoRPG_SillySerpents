@@ -32,7 +32,7 @@ public class YoRPG {
   // ~~~~~~~~~~~ INSTANCE VARIABLES ~~~~~~~~~~~
 
   //change this constant to set number of encounters in a game
-  public final static int MAX_ENCOUNTERS = 5;
+  public final static int MAX_ENCOUNTERS = 20;
 
   //each round, a Protagonist and a Monster will be instantiated...
   Protagonist pat;
@@ -108,8 +108,6 @@ public class YoRPG {
     }
       
     this.pickAClass(name);
-    System.out.println("Hi");
-    this.prestige();
     
 
     
@@ -196,8 +194,8 @@ public class YoRPG {
         } else {
           pat.increaseLevel(0, 10);
         }
-        if (pat.getLevel() == 3 ) {
-          System.out.println("Thy hath earned new ability!");
+        if (pat.getLevel() == 5 ) {
+          this.prestige();
         }
         System.out.println("\nWell done hero! You has slain a monster! Health hath been reset!");
         pat.resetHealth();

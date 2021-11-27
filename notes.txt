@@ -47,7 +47,7 @@ Archer:
     - 100 HP
     - Speed -20
     - 1 attack rating
-    - 40 strength
+    - 60 strength
     Special:
       - RRRRRRRRRRRRRRRRRRM: 90% to shoot three bullets do normal damage 10% to jam for 3 turns
 

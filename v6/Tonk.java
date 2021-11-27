@@ -28,8 +28,16 @@ public class Tonk extends Tank {
       this.name = name;
     }
     //HEY fix this:
-    public Tonk(int health, int damage, int strength, double attackRating, int defense, String name, int level) {
-      super(health, damage, strength, attackRating, defense, name, level);
+    public Tonk(int maxHealth, int damage, int strength, double attackRating, int defense, String name, int level) {
+      this.health = maxHealth + 100;
+      this.maxHealth = maxHealth + 100;
+      this.strength = strength - 5;
+      this.attackRating = attackRating - 0.1;
+      this.speed = speed - 5;
+      this.defense = defense + 10;
+      this.level = level;
+      this.name = name;
+      this.attackTypes = new String[] {"Shield Slap", "Shield O' Life", "Taunt"};
     }
     public static String about() {
       return "Tank's Big brother, earned a new set of armor forged by the holy dwarves";

@@ -19,6 +19,7 @@ public class Sniper extends Archer {
     super();
     this.strength = 100;
     this.health = 75;
+    this.maxHealth = 75;
     this.attackRating = 1.0;
     this.speed += 20;
     this.defense = 10;
@@ -30,8 +31,16 @@ public class Sniper extends Archer {
     this.name = name;
   }
   //HEY fix this:
-  public Sniper(int health, int damage, int strength, double attackRating, int defense, String name, int level) {
-    super(health, damage, strength, attackRating, defense, name, level);
+  public Sniper(int maxHealth, int strength, double attackRating, int defense, String name, int level) {
+    this.health = maxHealth;
+    this.maxHealth = maxHealth;
+    this.strength = strength + 60;
+    this.attackRating = attackRating;
+    this.speed = speed + 20;
+    this.defense = defense + 5;
+    this.level = level;
+    this.name = name;
+    this.attackTypes = new String[] {"Snipe", "Speed Boost", "One Shot - One Kill"};
   }
   public static String about() {
     return "One shot, one kill. Likes to be alone, taking out enemies one by one. Good attack power, but long recharge";

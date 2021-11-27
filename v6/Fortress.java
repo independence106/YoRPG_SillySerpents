@@ -26,7 +26,15 @@ public class Fortress extends Tank {
     }
     //HEY fix this:
     public Fortress(int health, int damage, int strength, double attackRating, int defense, String name, int level) {
-      super(health, damage, strength, attackRating, defense, name, level);
+      this.health = maxHealth + 300;
+      this.maxHealth = maxHealth + 300;
+      this.strength = strength - 25;
+      this.attackRating = attackRating - 0.2;
+      this.speed = speed - 15;
+      this.defense = defense + 30;
+      this.level = level;
+      this.name = name;
+      this.attackTypes = new String[] {"Shield Throw", "Shield O' Life", "Shield Rain"};
     }
     public static String about() {
       return "An experiment gone wrong. Fortress is a solid, immovable being. High defense almost no damage however.";

@@ -37,9 +37,8 @@ public class Character {
     this();
     this.name = name;
   }
-  public Character(int health, int damage, int strength, double attackRating, int defense, String name, int level) {
+  public Character(int health, int strength, double attackRating, int defense, String name, int level) {
     this.health = health;
-    this.damage = damage;
     this.strength = strength;
     this.attackRating = attackRating;
     this.defense = defense;

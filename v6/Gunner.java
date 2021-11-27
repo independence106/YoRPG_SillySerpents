@@ -5,9 +5,9 @@
  * - 100 HP
  * - Speed -20
  * - 1 attack rating
- * - 40 strength
+ * - 60 strength
  * Special:
- * - RRRRRRRRRRRRRRRRRRM: 90% to shoot three bullets do normal damage 10% to jam for 3 turns
+ * - Burst: 90% to shoot three bullets do normal damage 10% to jam for 3 turns
  */
 public class Gunner extends Archer {
   
@@ -15,7 +15,7 @@ public class Gunner extends Archer {
   
     public Gunner() {
       super();
-      this.strength = 40;
+      this.strength = 60;
       this.health = 100;
       this.attackRating = 1.0;
       if (this.getSpeed() > 20) {
@@ -29,8 +29,16 @@ public class Gunner extends Archer {
       this.name = name;
     }
     //HEY fix this:
-    public Gunner(int health, int damage, int strength, double attackRating, int defense, String name, int level) {
-      super(health, damage, strength, attackRating, defense, name, level);
+    public Gunner(int maxHealth, int damage, int strength, double attackRating, int defense, String name, int level) {
+      this.health = maxHealth + 25;
+      this.maxHealth = maxHealth + 25;
+      this.strength = strength + 60;
+      this.attackRating = attackRating;
+      this.speed = speed - 20;
+      this.defense = defense + 5;
+      this.level = level;
+      this.name = name;
+      this.attackTypes = new String[] {"Shoot", "Chug Jug", "Burst"};
     }
     public static String about() {
       return "Once he hath his music-o-magic in, nothing can stop him. Guns down anything while jamming to medeival rock";

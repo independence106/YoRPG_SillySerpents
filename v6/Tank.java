@@ -7,7 +7,7 @@ public class Tank extends Protagonist{
     this.attackState = "normalize";
     this.defense = 20;
     this.attackRating = 0.5;
-    this.strength = 50;
+    this.strength = 30;
     this.attackTypes = new String[] {"Shield Slap", "Shield O' Life"};
   }
   public Tank(String name) {
