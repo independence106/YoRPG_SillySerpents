@@ -39,13 +39,24 @@
 * Class chooser added
 * About methods created with mini backstories
 
+### V5:
+* New subclasses, see notes.txt for more info
+
+### V6:
+* Finished Subclasses, fixed bugs with "stackable items"
+* Fixed damage calcuation
+* Revamped dialogue onscreen stuff
+* New Boss fight
+* Shop Class
+* Dialogue Class
+
 ## Growing it in the future:
 * Clean up code 
 * Attributes such as magic resistance, physical armor
 * More items and abilities
 * Easter eggs
 * Graphics
-* More stories + boss fights
+* More stories
 * Single or duo player
 * New weapons 
 
