@@ -5,24 +5,33 @@ public class Wizard extends Protagonist{
     super();
     this.defense = 0;
     this.health = 50;
+    this.maxHealth = 50;
+    this.strength = 50;
+    this.speed -= 20;
+    this.attackRating = 1.0;
+    this.attackTypes = new String[] {"Fireball", "Vortex Summoning"};
   }
   public Wizard(String name) {
-    super(name);
-    this.defense = 0;
-    this.health = 50;
+    this();
+    this.name = name;
 
   }
-  public void calcNewDamage() {
-    this.damage = (int) (this.strength * this.attackRating);
+  public Wizard(int health, int strength, double attackRating, int defense, String name, int level) {
+    super(health, strength, attackRating, defense, name, level);
+  }
+  public static String about() {
+    return "\nAbrahahsdfa. Very forgetful about his spellbook" +
+           "\nMay occasionally turn something into a cat. Kinda cuckoo";
   }
   public int attack(Character e) {
-    calcNewDamage(this);
-    if (attackState.equals("specialize")) {
-        this.damage += 20;
-        e.lowerHP(this.damage);
-        System.out.println("Thy has summoned new vortex from dimension!");
+    calcNewDamage(this, e);
+    if (attackState.equals("Vortex Summoning")) {
+        this.damage += 15;
+        e.lowerHP(this.damage, this.getType());
+        this.test = "\nThy has summoned new vortex from dimension! Thee attacks ";
     } else {
-      e.lowerHP(this.damage);
+      this.test = "\nThee conjures fireball and attacks ";
+      e.lowerHP(this.damage, this.getType());
     }
     
     

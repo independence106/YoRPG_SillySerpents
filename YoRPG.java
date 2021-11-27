@@ -19,7 +19,7 @@
  /**
   * - THE SHOP!!!! NEW ARTIFACTS POGGERS, GAME IS UNBALANCED THOUGH!
   *
-  * - FINAL ADDITIONS: Choose class, shop, level increase....
+  * - cleaned up some code
   */
 
 
@@ -32,11 +32,11 @@ public class YoRPG {
   // ~~~~~~~~~~~ INSTANCE VARIABLES ~~~~~~~~~~~
 
   //change this constant to set number of encounters in a game
-  public final static int MAX_ENCOUNTERS = 5;
+  public final static int MAX_ENCOUNTERS = 20;
 
   //each round, a Protagonist and a Monster will be instantiated...
-  private Protagonist pat;
-  private Monster smaug;
+  Protagonist pat;
+  Monster smaug;
   String classPick = "";
 
   private int moveCount;
@@ -102,44 +102,12 @@ public class YoRPG {
         name = in.readLine();
         break;
       }
-      catch ( IOException e ) {
+      catch ( Exception e ) {
         System.out.println("Thee has a name, hath not?");
       }
     }
-    System.out.println("Please choose thy class!" +
-                       "\n\t1. Tank\n\t2. Archer\n\t3. Wizard"
-                       + "\n\t4. Swordsman");   
-             
-    while (!picked) {
-      try {
-        classPick = in.readLine();
-        if (classPick.equals("1")) {
-          pat = new Tank(name);
-          picked = true;
-        } else if (classPick.equals("2")) {
-          pat = new Archer(name);
-          picked = true;
-        } else if (classPick.equals("3")) {
-          pat = new Wizard(name);
-          picked = true;
-        } else if (classPick.equals("4")) {
-          pat = new Swordsman(name);
-          picked = true;
-        } else if (classPick.equals("info")) {
-          System.out.println(
-            "\nTank: TONK! Tanky, well built, little damage" + 
-            "\nArcher: TO FAST FOR YOU! Long range boi, fast, lotsa damage" +
-            "\nWizard: ABRACADABAD! Powerful attacks, low health" +
-            "\nSwordsman: ME SWING THING! Well built, medium damage, and health"
-          );
-        } else {
-          System.out.println("Thy pick is not valid! Again!");
-        }
-      } catch (Exception e) {
-        System.out.println("Thy pick is not valid! Again!");
-      }
-    } 
-  
+      
+    this.pickAClass(name);
     
 
     
@@ -158,7 +126,7 @@ public class YoRPG {
     int i = 1;
     int f = 1;
     int d1, d2;
-
+    
     if ( Math.random() >= ( difficulty / 3.0 ) )
 	    System.out.println( "\nNothing to see here. Move along!" );
     else {
@@ -171,6 +139,8 @@ public class YoRPG {
         smaug = new Bandit("smaug");
       }
       System.out.println( "\nLo, yonder " + smaug.getType() + " approacheth!" );
+
+      
 	    while( smaug.isAlive() && pat.isAlive() ) {
 
         // Give user the option of using a special attack:
@@ -178,10 +148,10 @@ public class YoRPG {
         // ...but if you get hit, you take more damage.
         while(true) {
           try {
-            System.out.println( "\nDo you feel lucky?" );
-            System.out.println( "\t1: Nay.\n\t2: Aye!" );
+            Dialogue.listOptions(pat);
+            
             i = Integer.parseInt( in.readLine() );
-            if (i < 3 && i > 0) {
+            if (i < (pat.attackTypes.length + 1) && i > 0) {
               break;
             } else {
               System.out.println("Thee hath picked no valid option!");
@@ -192,61 +162,46 @@ public class YoRPG {
           }
         }
 
-        if ( i == 2 )
-          pat.specialize();
-        else
-          pat.normalize();
-
-        d1 = pat.attack( smaug );
-        d2 = smaug.attack( pat );
-
-        //added some stuff here (health bar indicators)
-        System.out.println( "\n" + pat.getName() + " dealt " + d1 +
-                            " points of damage.");
-        if (smaug.isAlive())
-          System.out.println( "\n" + "Ye Olde Monster smacked " + pat.getName() +
-                              " for " + d2 + " points of damage.\n\n\t" + pat.getName()
-                              + " Health: " + pat.getHealth() + "\n\t" + "Monster Health: " +
-                              smaug.getHealth());
-        if (classPick.equals("2"))
-          System.out.println("\n\tArcher Speed: " + pat.getSpeed());
+        
+        pat.setAttackType(pat.attackTypes[i - 1]);
+        
+        
+        Dialogue.dealDamage(pat, smaug);
+        
         
 	    }//end while
 
 	    //option 1: you & the monster perish
 	    if ( !smaug.isAlive() && !pat.isAlive() ) {
-        System.out.println( "'Twas an epic battle, to be sure... " +
-                            "You cut ye olde monster down, but " +
-                            "with its dying breath ye olde monster. " +
-                            "laid a fatal blow upon thy skull." );
+        Dialogue.bothDie();
         return false;
 	    }
 	    //option 2: you slay the beast
 	    else if ( !smaug.isAlive() ) {
-        System.out.println( "\nHuzzaaH! Ye olde monster hath been slain!" );
-
-        // added things
-        System.out.println( "\nYou hath gained 10 XP and climbed one level" +
-                            "\nAdditionally thy battle rating hath increased by 0.1" +
-                            "\n\t1: Gain 10 health.\n\t2: Gain 10 strength.");
-        pat.attackRating += 0.1;
+        Dialogue.beastDies();
+        pat.attackRating += 0.05;
         while (true) {
           try {
             f = Integer.parseInt(in.readLine());
-            break;
-          } catch (IOException z) {
+            if (f > 0 && f < 3) {
+              break;
+            } else {
+              System.out.println("Not a valid choice");
+            }
+          } catch (Exception z) {
             System.out.println("Thee hath picked no number!");
           }
         }
+
         if (f == 1) {
-          pat.increaseLevel(10, 0);
+          pat.increaseLevel(2, 0);
         } else {
-          pat.increaseLevel(0, 10);
+          pat.increaseLevel(0, 2);
         }
-        if (pat.getLevel() == 3 ) {
-          System.out.println("Thy hath earned new ability!");
+        if (pat.getLevel() == 5 ) {
+          this.prestige();
         }
-        System.out.println("\nWell done hero! You has slain a monster! Health hath been reset!");
+        
         pat.resetHealth();
         pat.giveCoins((int) (Math.random() * 10));
         System.out.println("\nHey there weary traveler! " +
@@ -270,81 +225,7 @@ public class YoRPG {
         }
         //THIS IS STACKABLE!!!!! INTENDED!!!
         if (f == 1) {
-          System.out.println("\nWelcome to Silly Serpent's shop!" +
-                             "\nHere we sell all kinds of goodies" +
-                             "\nTo help aid you on your journey!" +
-                             "\nOur current inventory of magical items:" +
-                             "\n\t1. Ring O Power: Boost Strength by 10 - 10 Coins" +
-                             "\n\t2. Relic of TONKiness: Boost defense by 20 - 30 Coins" +
-                             "\n\t3. Gem of confidence: Boost attack rating by 1 - 80 Coins" +
-                             "\n\t4. Heart of an eagle: Boost maxhealth by 50 - 30 Coins" +
-                             "\n\t5. Rabbit's foot: Boost speed by 10 - 5 Coins" +
-                             "\n\t6. ????? - ????" +
-                             "\n\t7. Exit" +
-                             "\n\tBuy something or type 7 to exit!" +
-                             "\n\tYour coins: " + pat.getCoins());    
-          picked = false;
-          while(!picked) {
-          try {
-            f = Integer.parseInt(in.readLine());
-            if (f > 0 && f <= 7) {
-              int coins = pat.getCoins();
-              //so far stackable, will keep this as intentional!
-              if (f == 1 && coins > 10) {
-                pat.artifactChange(10, 0, 0, 0, 0, 0);
-                pat.giveCoins(-10);
-                System.out.println("\nThank you for buying!");
-                pat.update();
-                picked = true;
-              } else if (f == 2 && coins > 30) {
-                pat.artifactChange(0, 20, 0, 0, 0, 0);
-                pat.giveCoins(-30);
-                System.out.println("\nThank you for buying!");
-                pat.update();
-                picked = true;
-              } else if (f == 3 && coins > 80) {
-                pat.artifactChange(0, 0, 1, 0, 0, 0);
-                pat.giveCoins(-80);
-                System.out.println("\nThank you for buying!");
-                pat.update();
-                picked = true;
-              } else if (f == 4 && coins > 30) {
-                pat.artifactChange(0, 0, 0, 50, 0, 0);
-                pat.giveCoins(-30);
-                System.out.println("\nThank you for buying!");
-                pat.update();
-                picked = true;
-              } else if (f == 5 && coins > 5) {
-                pat.artifactChange(0, 0, 0, 0, 10, 0);
-                pat.giveCoins(-5);
-                System.out.println("\nThank you for buying!");
-                pat.update();
-                picked = true;
-              } else if (f == 6 && coins > 100) {
-                pat.artifactChange(0, 0, 0, 0, 0, 1);
-                pat.giveCoins(-100);
-                System.out.println("\nThank you for buying!");
-                pat.update();
-                picked = true;
-              } else if (f == 7) {
-                picked = true;
-              } 
-              else if (f == 7) {
-                picked = true;
-              }else {
-                System.out.println("Thee hath not enough coins! OUCH!");
-              }
-            } else {
-              System.out.println("Thee hath not picked a vlid option!");
-            }
-
-          } catch(Exception e) {
-            System.out.println("Thee hath not picked a valid option!");
-          }
-        }
-          System.out.println("\nEnjoy thy day!");      
-          System.out.println("\nCoins: " + pat.getCoins());    
-          System.out.println("\nNew stats: " + pat.toString());                 
+          Shop.purchase(pat);              
         } else {
           System.out.println("\nCoins: " + pat.getCoins());    
           System.out.println("\nNew stats: " + pat.toString()); 
@@ -363,7 +244,231 @@ public class YoRPG {
     return true;
   }//end playTurn()
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  public void pickAClass(String name) {
+    //If I ever move anything I can utilize this or smthing
 
+     System.out.println("Please choose thy starting class!" +
+                    "\n\t1. Tank\n\t2. Archer\n\t3. Wizard"
+                    + "\n\t4. Swordsman"); 
+     for (;;) {
+         try {
+             classPick = in.readLine();
+              if (classPick.equals("1")) {
+                 pat = new Tank(name);
+                 break;
+             } else if (classPick.equals("2")) {
+                 pat = new Archer(name);
+                 break;
+             } else if (classPick.equals("3")) {
+                 pat = new Wizard(name);
+                 break;
+             } else if (classPick.equals("4")) {
+                 pat = new Swordsman(name);
+                 break;
+             } else if (classPick.equals("info")) {
+                 System.out.println(
+                     Tank.about() + Archer.about() + Wizard.about() + Swordsman.about()    
+                 );
+            } else {
+                System.out.println("Thy pick is not valid! Again!");
+            }   
+        } catch (Exception m) {
+            System.out.println("Thy pick is not valid! Again!");
+        }
+     }
+  }
+  public boolean bossFight() {
+    int i;
+  
+    System.out.print("\033[H\033[2J");
+    System.out.flush();
+    System.out.println("*A mysterious voice starts speaking*");
+    System.out.println("It seems that you have reached my lair. I would applaud you if you weren't going to die soon!");
+    System.out.println("Those puny monsters are NOTHING. Feel the wrath of my pwer and tremble!");
+    System.out.println("Your life is now over. Guards KILL THIS HERO!");
+    
+    Guard guard1 = new Guard();
+    Guard guard2 = new Guard();
+    Boss boss = new Boss();
+    while(guard1.isAlive() && pat.isAlive()) {
+      for(;;) {
+        try {
+          Dialogue.listOptions(pat);
+          
+          i = Integer.parseInt( in.readLine() );
+          if (i < (pat.attackTypes.length + 1) && i > 0) {
+            break;
+          } else {
+            System.out.println("Thee hath picked no valid option!");
+          }
+        }
+        catch ( Exception e ) {
+          System.out.println("Thee hath picked no number!");
+        }
+      }
+
+      
+      pat.setAttackType(pat.attackTypes[i - 1]);
+      
+      
+      Dialogue.dealDamage(pat, guard1);
+      
+    }
+    if (!guard1.isAlive()) {
+      System.out.println("Hmm. It seems you have slain one of my guards. Guard 2 Attack!");
+      pat.resetHealth();
+
+    } else {
+      System.out.println("Twas a valiant attempt!");
+      return false;
+    }
+    while(guard2.isAlive() && pat.isAlive()) {
+      while(true) {
+        try {
+          Dialogue.listOptions(pat);
+          
+          i = Integer.parseInt( in.readLine() );
+          if (i < (pat.attackTypes.length + 1) && i > 0) {
+            break;
+          } else {
+            System.out.println("Thee hath picked no valid option!");
+          }
+        }
+        catch ( Exception e ) {
+          System.out.println("Thee hath picked no number!");
+        }
+      }
+
+      
+      pat.setAttackType(pat.attackTypes[i - 1]);
+      
+      
+      Dialogue.dealDamage(pat, guard2);
+      
+    }
+    if (!guard2.isAlive()) {
+      System.out.println("Hmm. It seems you have slain both my guards. I guess it is time for me to attack!");
+      pat.resetHealth();
+
+    } else {
+      System.out.println("Twas a valiant attempt!");
+      return false;
+    }
+    System.out.println("I am much powerful than my guards. Don't think this will be easy.");
+    while(boss.isAlive() && pat.isAlive()) {
+      while(true) {
+        try {
+          Dialogue.listOptions(pat);
+          
+          i = Integer.parseInt( in.readLine() );
+          if (i < (pat.attackTypes.length + 1) && i > 0) {
+            break;
+          } else {
+            System.out.println("Thee hath picked no valid option!");
+          }
+        }
+        catch ( Exception e ) {
+          System.out.println("Thee hath picked no number!");
+        }
+      }
+
+      
+      pat.setAttackType(pat.attackTypes[i - 1]);
+      
+      
+      Dialogue.dealDamage(pat, boss);
+      
+    }
+    if (boss.isAlive()) {
+      System.out.println("Twas a valiant attempt!");
+      return false;
+    }
+
+    System.out.println("*Gasp* How is this possible? I-i am the MOST POWERFUL BEING IN THE UNIVERSE!");
+    System.out.println("I have one more attack left. Since I am dying I will perform my most powerful attack yet...");
+    System.out.println("SELF DESTRUCTION! MWAHAHAHA!");
+    System.out.println("*You frantically look around to try to escape but it is too late.*" +
+                         "\nGoodbye Hero. Boss utters this with his last breath and closes his eyes.");    
+                         
+    System.out.println("Boss performs his final attack: Self Destruction. Everything goes white.");
+    System.out.println("Press 1 to continue");
+    
+    for (;;) {
+      try {
+        i = Integer.parseInt( in.readLine() );
+        if (i != 1) {
+          System.out.println("Tis just one button... Try again");
+        } else {
+          break;
+        }
+
+      } catch (Exception o) {
+        System.out.println("Tis just one button... Try again");
+      }
+    }
+      System.out.print("\033[H\033[2J");
+      System.out.flush();
+    if (Shop.bought[5]) {
+      return true;
+    }
+
+    return false;
+    
+
+  }
+  public void prestige() {
+    String pick = "";
+    String[] picks = {"",""};
+    System.out.println("\nYour current class : " + pat.getType());
+    picks[0] = pat.getType();
+    System.out.println("\n\nDear Adventurer, you have reached the point where you can prestige! Choose wisely!");
+    int pos = 0;
+    for (int i = 0; i < Character.classTypes.length; i++) {
+      if (Character.classTypes[i].equals(pat.getType())) {
+        pos = i;
+      }
+    }
+    System.out.println("\nHere are your available classes!" +
+                       "\n\t1. " + Character.classTypes[pos + 1] + 
+                       "\n\t2. " + Character.classTypes[pos + 2]);
+    for (;;) {
+      try {
+        pick = in.readLine();
+        break;
+      } catch (Exception o) {
+        System.out.println("Invalid Choice. Try Again!");
+      }
+    }
+    // VERY VERY INEFFICIENT
+    if (picks[0].equals("Tank")) {
+      if (pick.equals("1")) {
+        pat = new Tonk(pat.getMaxHealth(), pat.getStrength(), pat.getAttackRating(), pat.getDefense(), pat.getName(), pat.getLevel(), pat.getSpeed(), pat.getCoins());
+      } else {
+        pat = new Fortress(pat.getMaxHealth(), pat.getStrength(), pat.getAttackRating(), pat.getDefense(), pat.getName(), pat.getLevel(), pat.getSpeed(), pat.getCoins());
+      }
+    } else if (picks[0].equals("Archer")) {
+      if (pick.equals("1")) {
+        pat = new Sniper(pat.getMaxHealth(), pat.getStrength(), pat.getAttackRating(), pat.getDefense(), pat.getName(), pat.getLevel(), pat.getSpeed(), pat.getCoins());
+      } else {
+        pat = new Gunner(pat.getMaxHealth(), pat.getStrength(), pat.getAttackRating(), pat.getDefense(), pat.getName(), pat.getLevel(), pat.getSpeed(), pat.getCoins());
+      }
+    } else if (picks[0].equals("Wizard")) {
+      if (pick.equals("1")) {
+        pat = new Arcane(pat.getMaxHealth(), pat.getStrength(), pat.getAttackRating(), pat.getDefense(), pat.getName(), pat.getLevel(), pat.getSpeed(), pat.getCoins());
+      } else {
+        pat = new Necromancer(pat.getMaxHealth(), pat.getStrength(), pat.getAttackRating(), pat.getDefense(), pat.getName(), pat.getLevel(), pat.getSpeed(), pat.getCoins());
+      }
+    } else {
+      if (pick.equals("1")) {
+        pat = new Paladin(pat.getMaxHealth(), pat.getStrength(), pat.getAttackRating(), pat.getDefense(), pat.getName(), pat.getLevel(), pat.getSpeed(), pat.getCoins());
+      } else {
+        pat = new Barbarian(pat.getMaxHealth(), pat.getStrength(), pat.getAttackRating(), pat.getDefense(), pat.getName(), pat.getLevel(), pat.getSpeed(), pat.getCoins());
+      }
+    }
+    System.out.println("\nYour new stats:\n" + pat.toString());
+    System.out.println("Congradulations on your new class. Enjoy 10 free coins that thee hath earned for prestiging");
+  }
+  
 
   public static void main( String[] args ) {
     //As usual, move the begin-comment bar down as you progressively
@@ -374,12 +479,20 @@ public class YoRPG {
     YoRPG game = new YoRPG();
 
     int encounters = 0;
-
+    
     while( encounters < MAX_ENCOUNTERS ) {
-    if ( !game.playTurn() )
-    break;
-    encounters++;
-    System.out.println();
+      if ( !game.playTurn() )
+        break;
+
+      encounters++;
+      System.out.println();
+    }
+    if (game.bossFight()) {
+      System.out.println("I see that you have survived. You might not know why have survive.");
+      System.out.println("It was since you purchased ?????. You have beaten YoRPG. I hope you have enjoyed this game");
+      System.out.println("\nBest, \nJason and Vansh");
+    } else {
+      System.out.println("Good luck next time.");
     }
 
     System.out.println( "Thy game doth be over." );

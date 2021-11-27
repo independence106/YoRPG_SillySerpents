@@ -4,28 +4,40 @@ public class Archer extends Protagonist{
 
 
   public Archer() {
-    super();
+    this.health = 75;
+    this.maxHealth = 75;
+    this.strength = 40;
+    this.attackRating = 1.0;
+    this.speed = 50;
+    this.defense = 5;
+    this.attackTypes = new String[] {"Snipe", "Speed Boost"};
+    this.attackState = "0";
+
   }
   public Archer(String name) {
-    super(name);
+    this();
+    this.name = name;
   }
-  public void lowerHP(int amount) {
-    if((Math.random() * speed) < 50) {
-      this.health -= amount;
-    } else {
-      System.out.println("\nThy speed has prevented thee from taking damage! Lucky!");
-    }
+  public Archer(int maxHealth, int strength, double attackRating, int defense, String name, int level) {
+    super(maxHealth, strength, attackRating, defense, name, level);
+  }
+  
+  public static String about() {
+    return "\nPew Pew. Very nice class. Lotsa speed and dodging, good damage. Shoots things.";
   }
   
   public int attack(Character e) {
-    calcNewDamage(this);
-    if (attackState.equals("specialize")) {
+    calcNewDamage(this, e);
+    if (attackState.equals("Speed Boost")) {
         //yes stackable speed is intended
+        //only will do 1/2 damage
         this.speed += 1;
-        e.lowerHP(this.damage);
-        System.out.println("\nTraining with master elmo has paid off. Thy is now faster!");
+        this.damage /= 2;
+        e.lowerHP(this.damage, this.getType());
+        this.test = "\nTraining with master elmo has paid off. Thy is now faster! Speed +1! " + this.getName() + " shoots ";
     } else {
-      e.lowerHP(this.damage);
+      this.test = "Steady...Aim...FIRE! " + this.getName() + " shoots ";
+      e.lowerHP(this.damage, this.getType());
     }
     
     

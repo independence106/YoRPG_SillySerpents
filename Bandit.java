@@ -15,25 +15,30 @@ public class Bandit extends Monster {
     public String getType() {
       return "Bandit";
     }
-    public int attack(Protagonist e) {
-        calcNewDamage(this);
+    public static String about() {
+      return "I steal things. Bandits are notorius for their ability to steal." +
+             "\nYou never want to meet these creatures in a game for you'll find you wallet to be empty...";
+    }
+    public int attack(Character e) {
+        calcNewDamage(this, e);
         if (attackState.equals("specialize")) {
           //System.out.println("Swinging Hammer...");
           int amplifier = (int) (Math.random() * 10);
           if (amplifier > 5) {
             damage += amplifier * 2;
-            e.lowerHP(this.damage);
+            e.lowerHP(this.damage, this.getType());;
           } else {
-            System.out.println("Youg swung too hard, and bashed thy skull. Ye lost 5 health!");
+            this.test = "Youg swung too hard, and bashed thy skull. Ye lost 5 health!";
             lowerHP(5);
-            e.lowerHP(this.damage);
+            e.lowerHP(this.damage, this.getType());
           }
-        } else if (Math.random() < 0.01 && e.getCoins() > 1) {
+        } else if (Math.random() < 0.3 && e.getCoins() > 1) {
           e.giveCoins(-1);
-          System.out.println("Thy sneaky sir has stolen 1 of thee's coins!");
+          this.test = "\nThy sneaky sir has stolen 1 of thee's coins! He attacks you";
         } else {
-          e.lowerHP(this.damage);
-          System.out.println(this.name + " performs head bash!");
+          e.lowerHP(this.damage, this.getType());
+          this.test = "\n" + this.getType() + " performs head bash! He attacks you";
+          
         }
         return this.damage;
       }

@@ -22,28 +22,30 @@ public class Worg extends Monster {
     public String getType() {
       return "Worg";
     }
-    public void lowerHP(int amount) {
+    public void lowerHP(int amount, String attackingClass) {
       if((Math.random() * speed) < 50) {
         this.health -= amount;
+        this.attackMiss = "";
       } else {
-        System.out.println("\nWorg too fast, attack has been missed!");
+        this.attackMiss = "\nWorg too fast, thy attack has been missed!";
       }
     }
+    public static String about() {
+      return "Speed. I am speed. These monsters are fast. Too fast in fact. They mainly" +
+             "\nwill just harass you. No harm done, right?";
+    }
     public int attack(Character e) {
-        calcNewDamage(this);
+        calcNewDamage(this, e);
         if (attackState.equals("specialize")) {
           //System.out.println("Swinging Hammer...");
           int amplifier = (int) (Math.random() * 10);
           if (amplifier > 5) {
             damage += amplifier * 2;
-            e.lowerHP(this.damage);
-          } else {
-            System.out.println("Youg swung too hard, and bashed thy skull. Ye lost 5 health!");
-            lowerHP(5);
-            e.lowerHP(this.damage);
-          }
+            e.lowerHP(this.damage, this.getType());
+          } 
         } else {
-          e.lowerHP(this.damage);
+          this.test = "\nWorg uses tis speed to attack thee. He attacks you";
+          e.lowerHP(this.damage, this.getType());
          
         }
         return this.damage;
