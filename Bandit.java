@@ -9,7 +9,7 @@ public class Bandit extends Monster {
         this.health = 75;
     }
     public Bandit(int health, int damage, int strength, double attackRating, int defense, String name, int level) {
-        super(health, damage, strength, attackRating, defense, name, level);
+        super(health, strength, attackRating, defense, name, level);
         this.health = 75;
     }
     public String getType() {
@@ -35,6 +35,7 @@ public class Bandit extends Monster {
         } else if (Math.random() < 0.3 && e.getCoins() > 1) {
           e.giveCoins(-1);
           this.test = "\nThy sneaky sir has stolen 1 of thee's coins! He attacks you";
+          this.damage = 0;
         } else {
           e.lowerHP(this.damage, this.getType());
           this.test = "\n" + this.getType() + " performs head bash! He attacks you";

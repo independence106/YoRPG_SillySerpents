@@ -13,8 +13,8 @@ public class Worg extends Monster {
         this.health = 50;
         this.strength = 15;
     }
-    public Worg(int health, int damage, int strength, double attackRating, int defense, String name, int level) {
-        super(health, damage, strength, attackRating, defense, name, level);
+    public Worg(int health, int strength, double attackRating, int defense, String name, int level) {
+        super(health, strength, attackRating, defense, name, level);
         this.speed = 200;
         this.health = 50;
         this.strength = 15;
@@ -24,8 +24,9 @@ public class Worg extends Monster {
     }
     public void lowerHP(int amount, String attackingClass) {
       if((Math.random() * speed) < 50) {
-        this.health -= amount;
         this.attackMiss = "";
+        this.health -= amount;
+        
       } else {
         this.attackMiss = "\nWorg too fast, thy attack has been missed!";
       }

@@ -204,6 +204,7 @@ public class YoRPG {
         
         pat.resetHealth();
         pat.giveCoins((int) (Math.random() * 10));
+        pat.giveCoins(5);
         System.out.println("\nHey there weary traveler! " +
                            "Would thee like access to the SHOP?" +
                            "\n\t1. YES\n\t2. NO");
@@ -467,6 +468,7 @@ public class YoRPG {
     }
     System.out.println("\nYour new stats:\n" + pat.toString());
     System.out.println("Congradulations on your new class. Enjoy 10 free coins that thee hath earned for prestiging");
+    pat.giveCoins(10);
   }
   
 

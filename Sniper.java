@@ -62,9 +62,11 @@ public class Sniper extends Archer {
           e.lowerHP(e.getHealth(), this.getType());
         } else {
           this.test = "\nYikes! Your bullet only grazed ";
-          e.lowerHP(this.damage / 3, this.getType());
+          this.damage /= 3;
+          e.lowerHP(this.damage, this.getType());
         }
       } else {
+        this.test = "Thee shoots ";
         e.lowerHP(this.damage, this.getType());
       }
       
@@ -72,6 +74,8 @@ public class Sniper extends Archer {
       return this.damage;
     } else {
       this.test = "\nReloading Shot . . . Thee cannot attack! You attack ";
+      this.damage = 0;
+
       turnCounter = 0;
       return 0;
     }

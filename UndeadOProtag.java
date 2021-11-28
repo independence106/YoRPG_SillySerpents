@@ -22,8 +22,8 @@ public class UndeadOProtag extends Protagonist {
       this.name = name;
   
     }
-    public UndeadOProtag(int health, int damage, int strength, double attackRating, int defense, String name, int level) {
-      super(health, damage, strength, attackRating, defense, name, level);
+    public UndeadOProtag(int health,int strength, double attackRating, int defense, String name, int level) {
+      super(health, strength, attackRating, defense, name, level);
     }
     public static String about() {
       return "Abrahahsdfa. Very forgetful about his spellbook" +

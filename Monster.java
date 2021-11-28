@@ -12,9 +12,25 @@ public class Monster extends Character {
   public String getType() {
     return "";
   }
-  public Monster(int health, int damage, int strength, double attackRating, int defense, String name, int level) {
-      super(health, damage, strength, attackRating, defense, name, level);
+  public Monster(int health, int strength, double attackRating, int defense, String name, int level) {
+      super(health, strength, attackRating, defense, name, level);
   } 
+  public void lowerHP(int amount) {
+    if((Math.random() * speed) < 50) {
+      this.health -= amount;
+      this.attackMiss = "";
+    } else {
+      this.attackMiss = "\nThy speed has prevented thee from taking damage! Unlucky for you!!";
+    }
+  }
+  public void lowerHP(int amount, String attackingClass) {
+    if((Math.random() * speed) < 50) {
+      this.health -= amount;
+      this.attackMiss = "";
+    } else {
+      this.attackMiss = "\n" + this.type + " speed has prevented thee from taking damage! Unlucky for you!!";
+    }
+  }
   public int attack(Character e) {
     calcNewDamage(this, e);
     if (attackState.equals("specialize")) {

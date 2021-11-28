@@ -1,7 +1,7 @@
 /** WIP (Currently teseting 1 undead)
  * Necromancer
  * 
- * Special: Undead: Summon an undead (up to one). Undeads have health and attack scaled to wizard lvl
+ * Special: Undead: Summon an undead (up to two). Undeads have health and attack scaled to wizard lvl
  * - 10 defense
  * - 70 HP
  * - Speed + 0
@@ -53,14 +53,15 @@ public class Necromancer extends Wizard {
     }
     public void lowerHP(int amount, String attackingClass) {
       if (numOUndeads > 0) {
-        System.out.println("Ha but luckily thee undead saves thy and takes thy damage!");
+        attackMiss = "\n" + attackingClass + " attacks you, but luckily thee undead saves thy and takes thy damage!";
         blake.lowerHP(amount, attackingClass);
         if (!blake.isAlive()) {
-          System.out.println("Alast, thy undead was not strong enough and died!");
+          attackMiss += "Alast, thy undead was not strong enough and died!";
           numOUndeads--;
         }
       } else {
         this.health -= amount;
+        attackMiss = "";
       }
       
     }
@@ -73,8 +74,9 @@ public class Necromancer extends Wizard {
           this.test = "\nThee summons an undead! Thee attacks ";
           this.damage = 0;
           numOUndeads++;
+          blake.health += 50;
         } else {
-          this.test = "\nYikes! Thee skill cannot summon more than 2 undeads! Thee instead attacks ";
+          this.test = "\nYikes! Thee skill cannot summon more than 1 undeads! Thee instead attacks ";
           e.lowerHP(this.damage, this.getType());
         }
       } else if (attackState.equals("Vortex Summoning")) {

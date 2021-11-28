@@ -10,7 +10,7 @@
  */
 public class Tonk extends Tank {
     
-    private boolean taunt = true;
+    private boolean taunt = false;
     private int counter = 0;
 
     public Tonk() {
@@ -48,12 +48,13 @@ public class Tonk extends Tank {
     }
     public void lowerHP(int amount, String attackingClass) {
       if (taunt == true) {
-        System.out.println("Ha! Thy taunt enrages puny monsters and thee takes no damage!");
+        this.attackMiss = "Ha! Thy taunt enrages puny monsters and thee takes no damage!";
       } else {
         if((Math.random() * speed) < 50) {
           this.health -= amount;
+          this.attackMiss = "";
         } else {
-          System.out.println("\nThy speed has prevented thee from taking damage! Lucky!");
+          this.attackMiss = "\nThy speed has prevented thee from taking damage! Lucky!";
         }
       }
     }
@@ -93,6 +94,9 @@ public class Tonk extends Tank {
         e.lowerHP(this.damage, this.getType());
       }
       counter++;
+      if (counter >= 4) {
+        taunt = false;
+      }
       return this.damage;
     }
   }

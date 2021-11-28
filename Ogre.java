@@ -6,8 +6,8 @@ public class Ogre extends Monster {
     public Ogre(String name) {
         super(name);
     }
-    public Ogre(int health, int damage, int strength, double attackRating, int defense, String name, int level) {
-        super(health, damage, strength, attackRating, defense, name, level);
+    public Ogre(int health, int strength, double attackRating, int defense, String name, int level) {
+        super(health, strength, attackRating, defense, name, level);
     }
     public String getType() {
       return "Ogre";
