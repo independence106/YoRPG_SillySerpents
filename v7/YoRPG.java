@@ -211,9 +211,7 @@ public class YoRPG {
         while(!picked) {
           try {
             f = Integer.parseInt(in.readLine());
-            if (f == 1) {
-              picked = true;
-            } else if (f == 2) {
+            if (f == 1 || f == 2) {
               picked = true;
             } else {
               System.out.println("Thee hath not picked a valid option!");
@@ -384,14 +382,13 @@ public class YoRPG {
       return false;
     }
 
-    System.out.println("*Gasp* How is this possible? I-i am the MOST POWERFUL BEING IN THE UNIVERSE!");
-    System.out.println("I have one more attack left. Since I am dying I will perform my most powerful attack yet...");
-    System.out.println("SELF DESTRUCTION! MWAHAHAHA!");
-    System.out.println("*You frantically look around to try to escape but it is too late.*" +
-                         "\nGoodbye Hero. Boss utters this with his last breath and closes his eyes.");    
-                         
-    System.out.println("Boss performs his final attack: Self Destruction. Everything goes white.");
-    System.out.println("Press 1 to continue");
+    System.out.println("*Gasp* How is this possible? I-i am the MOST POWERFUL BEING IN THE UNIVERSE!" + 
+    "\nI have one more attack left. Since I am dying I will perform my most powerful attack yet..." + 
+    "\nSELF DESTRUCTION! MWAHAHAHA!" + 
+    "\n*You frantically look around to try to escape but it is too late.*" + 
+    "\nGoodbye Hero. Boss utters this with his last breath and closes his eyes." +
+    "\nBoss performs his final attack: Self Destruction. Everything goes white." +
+    "\nPress 1 to continue");
     
     for (;;) {
       try {
