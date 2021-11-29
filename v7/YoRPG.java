@@ -86,7 +86,7 @@ public class YoRPG {
     while(true) {
       try {
         difficulty = Integer.parseInt( in.readLine() );
-        if (difficulty > 3) {
+        if (difficulty < 1 || difficulty > 3) {
           throw new IOException("Thee hath picked no difficulty! Try Again");
         }
         break;
@@ -280,10 +280,10 @@ public class YoRPG {
   
     System.out.print("\033[H\033[2J");
     System.out.flush();
-    System.out.println("*A mysterious voice starts speaking*");
-    System.out.println("It seems that you have reached my lair. I would applaud you if you weren't going to die soon!");
-    System.out.println("Those puny monsters are NOTHING. Feel the wrath of my pwer and tremble!");
-    System.out.println("Your life is now over. Guards KILL THIS HERO!");
+    System.out.println("*A mysterious voice starts speaking*" +
+    "\nIt seems that you have reached my lair. I would applaud you if you weren't going to die soon!" + 
+    "\nThose puny monsters are NOTHING. Feel the wrath of my power and tremble!" + 
+    "\nYour life is now over. Guards, KILL THIS HERO!");
     
     Guard guard1 = new Guard();
     Guard guard2 = new Guard();
