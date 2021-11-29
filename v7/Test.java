@@ -17,9 +17,7 @@ import javax.swing.Timer;
 public class Test extends Canvas{  
 
     private Timer timer;
-    public Test() {
-
-    }
+    public Test() {   }
     public void paint(Graphics g) { 
         
         
@@ -42,7 +40,7 @@ public class Test extends Canvas{
             image = ImageIO.read(new File("R.png"));
             System.out.println(image.getWidth()); 
         } catch (Exception e) {
-            System.out.println("Fialed");
+            System.out.println("Failed");
         }
         // The above line throws an checked IOException which must be caught.
         final int width = 78;
@@ -68,8 +66,8 @@ public class Test extends Canvas{
     
         public static void main(String[] args) { 
         
-        Test m=new Test();  
-        JFrame f=new JFrame();  
+        Test m = new Test();  
+        JFrame f = new JFrame();  
          
         f.setSize(1200,800);  
         //f.setLayout(null);  
